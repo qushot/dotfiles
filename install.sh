@@ -24,3 +24,4 @@ source ~/.zshrc
 
 # rm -rf .zlogin .zlogout .zprofile .zpreztorc .zshenv .zshrc .zprezto
 # rm -rf .git .gitmodules .zprezto
+# curl -LSfs https://raw.githubusercontent.com/qushot/dotfiles/master/install.sh | bash
