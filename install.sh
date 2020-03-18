@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-DOTFILES_DIR="$HOME/.ditfiles"
+DOTFILES_DIR="$HOME/.dotfiles"
 
 git clone https://github.com/qushot/dotfiles.git $DOTFILES_DIR
 cd $DOTFILES_DIR
@@ -24,4 +24,4 @@ source ~/.zshrc
 
 # rm -rf .zlogin .zlogout .zprofile .zpreztorc .zshenv .zshrc .zprezto
 # rm -rf .git .gitmodules .zprezto
-# curl -LSfs https://raw.githubusercontent.com/qushot/dotfiles/master/install.sh | bash
+# curl -LSfs https://raw.githubusercontent.com/qushot/dotfiles/master/install.sh | zsh
