@@ -18,6 +18,8 @@ ln -sf $DOTFILES_DIR/prompt_qushot_setup ~/.zprezto/modules/prompt/functions/pro
 ln -sf $DOTFILES_DIR/.vimrc ~/.vimrc
 ln -sf $DOTFILES_DIR/.zshrc ~/.zshrc
 ln -sf $DOTFILES_DIR/.zpreztorc ~/.zpreztorc
+ln -sf $DOTFILES_DIR/.gitconfig ~/.gitconfig
+ln -sf $DOTFILES_DIR/.gitignore_global ~/.gitignore_global
 
 source ~/.zpreztorc
 source ~/.zshrc

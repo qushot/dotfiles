@@ -1,0 +1,28 @@
+[alias]
+	co = checkout
+	cm = commit
+	cma = commit -a
+	cmm = commit -m
+	s = status
+	a = add
+	cob = checkout -b
+	d = !git diff $(git status | grep modified: | sed -e 's/modified://g' | peco)
+	dc = diff --cached
+	b = branch
+	ba = branch -a
+	la = log --oneline
+	puo = push -u origin
+	# ps = !git push origin git rev-parse --abbrev-ref HEAD
+    # pl = !git pull origin git rev-parse --abbrev-ref HEAD
+    # tps = !git tag cat version.txt && git push origin --tags
+	delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -p -I % git branch -d %
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+[commit]
+	template = ~/.stCommitMsg

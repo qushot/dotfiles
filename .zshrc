@@ -86,9 +86,6 @@ export PATH=$PATH:/usr/bin
 # JetBrains IDE
 export PATH="$PATH:/Users/moto/Library/Application Support/JetBrains/Toolbox/cli"
 
-# Slack-bot
-#export SLACKBOT=xoxp-13283868036-147305468065-297403622178-8b12a4d354362d781267360b82ee56c5
-
 #node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
