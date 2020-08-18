@@ -181,10 +181,21 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 # https://cloud.google.com/run/docs/authenticating/developers?hl=ja
 alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
 
-# GCLOUD_ACTIVE_CONFIG=$(cat $HOME/.config/gcloud/active_config)
-
 # TODO automation install.sh
+# git clone https://github.com/progrhyme/gcloud-prompt.git
 # git clone https://github.com/superbrothers/zsh-kubectl-prompt.git
+
 autoload -U colors; colors
+
+. $HOME/gcloud-prompt/gcloud-prompt.sh
+GCLOUD_PROMPT_CONFIG_KEYS=(core.account)
+GCPROMPT="☁️ %F{cyan}[$(gcloud_prompt)]%f"
+
 source $HOME/zsh-kubectl-prompt/kubectl.zsh
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+zstyle ':zsh-kubectl-prompt:' separator '|'
+zstyle ':zsh-kubectl-prompt:' preprompt '['
+zstyle ':zsh-kubectl-prompt:' postprompt ']'
+K8SPROMPT='☸%F{blue}$ZSH_KUBECTL_PROMPT%f'
+
+PROMPT="$GCPROMPT $K8SPROMPT
+$PROMPT"
