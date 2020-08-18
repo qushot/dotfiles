@@ -82,6 +82,8 @@ fi
 # General
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/bin
+export EDITOR="vim"
+export VISUAL="vim"
 
 # JetBrains IDE
 export PATH="$PATH:/Users/moto/Library/Application Support/JetBrains/Toolbox/cli"
@@ -169,5 +171,20 @@ _ng_completion () {
 }
 
 compctl -K _ng_completion ng
+
+alias kctx="kubectx"
+alias kctxp='kctx $(kctx | peco)'
+alias kns="kubens"
 ###-end-ng-completion###
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+# https://cloud.google.com/run/docs/authenticating/developers?hl=ja
+alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
+
+# GCLOUD_ACTIVE_CONFIG=$(cat $HOME/.config/gcloud/active_config)
+
+# TODO automation install.sh
+# git clone https://github.com/superbrothers/zsh-kubectl-prompt.git
+autoload -U colors; colors
+source $HOME/zsh-kubectl-prompt/kubectl.zsh
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
