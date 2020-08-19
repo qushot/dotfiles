@@ -64,9 +64,7 @@ if which peco &> /dev/null; then
   }
   zle -N peco_select_history
   bindkey '^R' peco_select_history
-fi
 
-if which peco &> /dev/null; then
   function peco_select_gcloud_config() {
     local confname=$(gcloud config configurations list | tail -n +2 | peco --query "$LBUFFER" | awk '{print $1}')
     if [ -n "${confname}" ]; then
@@ -181,21 +179,46 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 # https://cloud.google.com/run/docs/authenticating/developers?hl=ja
 alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
 
-# TODO automation install.sh
-# git clone https://github.com/progrhyme/gcloud-prompt.git
-# git clone https://github.com/superbrothers/zsh-kubectl-prompt.git
-
 autoload -U colors; colors
 
-. $HOME/gcloud-prompt/gcloud-prompt.sh
-GCLOUD_PROMPT_CONFIG_KEYS=(core.account)
-GCPROMPT="☁️ %F{cyan}[$(gcloud_prompt)]%f"
-
-source $HOME/zsh-kubectl-prompt/kubectl.zsh
+# zsh-kubectl-promptが無ければインストール
+if [[ ! -d ~/.zsh-kubectl-prompt ]];then
+  git clone https://github.com/superbrothers/zsh-kubectl-prompt.git ~/.zsh-kubectl-prompt
+fi
+source $HOME/.zsh-kubectl-prompt/kubectl.zsh
 zstyle ':zsh-kubectl-prompt:' separator '|'
 zstyle ':zsh-kubectl-prompt:' preprompt '['
 zstyle ':zsh-kubectl-prompt:' postprompt ']'
 K8SPROMPT='☸%F{blue}$ZSH_KUBECTL_PROMPT%f'
 
-PROMPT="$GCPROMPT $K8SPROMPT
-$PROMPT"
+function gcp_info {
+  if [ -f "$HOME/.config/gcloud/active_config" ]; then
+    gcp_profile=$(cat $HOME/.config/gcloud/active_config)
+    gcp_account=$(awk '/account/{print $3}' $HOME/.config/gcloud/configurations/config_$gcp_profile)
+    gcp_project=$(awk '/project/{print $3}' $HOME/.config/gcloud/configurations/config_$gcp_profile)
+    if [ ! -z ${gcp_project} ]; then
+      echo "${gcp_project}|${gcp_account}"
+    fi
+  fi
+}
+GCPROMPT='☁️ %F{cyan}[`gcp_info`]%f'
+
+PROMPT=${GCPROMPT}" ${K8SPROMPT}
+${PROMPT}"
+
+# ESC + 「x」キーを入力し「testris」と入力
+autoload -Uz tetris
+zle -N tetris
+
+# ディレクトリ名のみで移動できるようになる
+# https://suin.io/568
+# .zshenvに書くべき
+cdpath=(
+  $HOME/go/src/github.com(N-/)
+  $cdpath
+)
+
+# zplugが無ければインストール
+# if [[ ! -d ~/.zplug ]];then
+  # git clone https://github.com/zplug/zplug ~/.zplug
+# fi
