@@ -49,24 +49,26 @@ source <(kubectl completion zsh)
 alias k=kubectl
 complete -o default -F __start_kubectl k
 
+##### https://gist.github.com/yuttie/2aeaecdba24256c73bf2 #####
 # Search shell history with peco: https://github.com/peco/peco
 # Adapted from: https://github.com/mooz/percol#zsh-history-search
 if which peco &> /dev/null; then
   function peco_select_history() {
     local tac
-    (which gtac &> /dev/null && tac="gtac") || \
-      (which tac &> /dev/null && tac="tac") || \
+    { which gtac &> /dev/null && tac="gtac" } || \
+      { which tac &> /dev/null && tac="tac" } || \
       tac="tail -r"
-    BUFFER=$(fc -l -n 1 | eval $tac | awk '!a[$0]++' |\
-                peco --query "$LBUFFER")
+    BUFFER=$(fc -l -n 1 | eval $tac | \
+                peco --layout=bottom-up --query "$LBUFFER")
     CURSOR=$#BUFFER # move cursor
     zle -R -c       # refresh
   }
+
   zle -N peco_select_history
   bindkey '^R' peco_select_history
 
   function peco_select_gcloud_config() {
-    local confname=$(gcloud config configurations list | tail -n +2 | peco --query "$LBUFFER" | awk '{print $1}')
+    local confname=$(gcloud config configurations list | tail -n +2 | peco --layout=bottom-up --query "$LBUFFER" | awk '{print $1}')
     if [ -n "${confname}" ]; then
       BUFFER=$(echo gcloud config configurations activate $confname)
       CURSOR=$#BUFFER # move cursor
