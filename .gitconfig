@@ -24,5 +24,9 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
+[include]
+	path = ~/.gitconfig.local
 [commit]
 	template = ~/.stCommitMsg
+[pull]
+	rebase = false
