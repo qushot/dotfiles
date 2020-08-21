@@ -72,8 +72,8 @@ if which peco &> /dev/null; then
   function peco_select_gcloud_config() {
     local confname=$(gcloud config configurations list | tail -n +2 | peco --query "$LBUFFER" | awk '{print $1}')
     if [ -n "${confname}" ]; then
-      BUFFER=$(echo gcloud config configurations activate $confname)
-      CURSOR=$#BUFFER # move cursor
+      BUFFER="gcloud config configurations activate ${confname}"
+      zle accept-line
       zle -R -c       # refresh
     fi
   }
