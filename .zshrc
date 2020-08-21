@@ -37,13 +37,13 @@ if [ -e /usr/local/share/zsh-completions ]; then
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/moto/google-cloud-sdk/path.zsh.inc' ]; then
-	source '/Users/moto/google-cloud-sdk/path.zsh.inc';
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then
+	source '~/google-cloud-sdk/path.zsh.inc';
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/moto/google-cloud-sdk/completion.zsh.inc' ]; then
-	source '/Users/moto/google-cloud-sdk/completion.zsh.inc';
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then
+	source '~/google-cloud-sdk/completion.zsh.inc';
 fi
 
 # kubectl completion
@@ -104,7 +104,7 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 # JetBrains IDE
-export PATH="$PATH:/Users/moto/Library/Application Support/JetBrains/Toolbox/cli"
+export PATH="$PATH:~/Library/Application Support/JetBrains/Toolbox/cli"
 
 #node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
