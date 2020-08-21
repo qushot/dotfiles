@@ -30,3 +30,6 @@
 	template = ~/.stCommitMsg
 [pull]
 	rebase = false
+[ghq]
+	root = ~/go/src
+	root = ~/.ghq

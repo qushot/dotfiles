@@ -61,7 +61,7 @@ if which peco &> /dev/null; then
       { which tac &> /dev/null && tac="tac" } || \
       tac="tail -r"
     BUFFER=$(fc -l -n 1 | eval $tac | \
-                peco --layout=bottom-up --query "$LBUFFER")
+                peco --query "$LBUFFER")
     CURSOR=$#BUFFER # move cursor
     zle -R -c       # refresh
   }
@@ -70,7 +70,7 @@ if which peco &> /dev/null; then
   bindkey '^R' peco_select_history
 
   function peco_select_gcloud_config() {
-    local confname=$(gcloud config configurations list | tail -n +2 | peco --layout=bottom-up --query "$LBUFFER" | awk '{print $1}')
+    local confname=$(gcloud config configurations list | tail -n +2 | peco --query "$LBUFFER" | awk '{print $1}')
     if [ -n "${confname}" ]; then
       BUFFER=$(echo gcloud config configurations activate $confname)
       CURSOR=$#BUFFER # move cursor
@@ -80,6 +80,22 @@ if which peco &> /dev/null; then
   zle -N peco_select_gcloud_config
   bindkey '^V' peco_select_gcloud_config
 fi
+
+# .ghqディレクトリが無ければ作成
+if [[ ! -d ~/.ghq ]];then
+  mkdir ~/.ghq
+fi
+
+function peco_cd_ghq_list() {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco_cd_ghq_list
+bindkey '^]' peco_cd_ghq_list
 
 # General
 export PATH=$PATH:/usr/local/bin
@@ -118,10 +134,6 @@ PATH=${JAVA_HOME}/bin:${PATH}
 
 alias lla="ls -la"
 alias g="git"
-alias cd="cdls"
-function cdls() {
-	builtin cd $1 && ls
-}
 
 autoload -U compinit && compinit -u
 
