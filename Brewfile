@@ -27,6 +27,7 @@ brew "wget"
 brew "zsh"
 brew "zsh-completions"
 brew "sanemat/font/ricty", args: ["with-powerline"]
+cask "docker"
 cask "google-chrome"
 cask "google-japanese-ime"
 cask "hyper"
