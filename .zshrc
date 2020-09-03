@@ -116,18 +116,6 @@ export PATH=$PATH:$GOPATH/bin
 # gcloud
 export CLOUDSDK_PYTHON=python3
 
-# GAE/Go
-export PATH=$PATH:/usr/local/go_appengine
-#export PATH=/usr/local/opt/openssl/bin:$PATH
-
-# Java
-# 使うバージョンに合わせてJAVA_HOMEを変更する
-# export JAVA_HOME=`/usr/libexec/java_home -v 1.7.0_80`
-# export PATH=$PATH:/usr/local/appengine-java-sdk-1.9.67/bin/
-# export PATH=$PATH:/usr/local/appengine-java-sdk-1.9.54/bin/
-export JAVA_HOME=`/usr/libexec/java_home -v "1.8"`
-PATH=${JAVA_HOME}/bin:${PATH}
-
 alias lla="ls -la"
 alias g="git"
 
