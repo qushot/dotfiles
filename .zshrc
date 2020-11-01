@@ -186,10 +186,10 @@ if [[ ! -d ~/.zsh-kubectl-prompt ]];then
   git clone https://github.com/superbrothers/zsh-kubectl-prompt.git ~/.zsh-kubectl-prompt
 fi
 source $HOME/.zsh-kubectl-prompt/kubectl.zsh
-zstyle ':zsh-kubectl-prompt:' separator '|'
-zstyle ':zsh-kubectl-prompt:' preprompt '['
-zstyle ':zsh-kubectl-prompt:' postprompt ']'
-K8SPROMPT='☸%F{blue}$ZSH_KUBECTL_PROMPT%f'
+zstyle ':zsh-kubectl-prompt:' separator '('
+zstyle ':zsh-kubectl-prompt:' preprompt ''
+zstyle ':zsh-kubectl-prompt:' postprompt ')'
+K8SPROMPT='%F{blue}K8s: $ZSH_KUBECTL_PROMPT%f'
 
 function gcp_info {
   if [ -f "$HOME/.config/gcloud/active_config" ]; then
@@ -197,13 +197,14 @@ function gcp_info {
     gcp_account=$(awk '/account/{print $3}' $HOME/.config/gcloud/configurations/config_$gcp_profile)
     gcp_project=$(awk '/project/{print $3}' $HOME/.config/gcloud/configurations/config_$gcp_profile)
     if [ ! -z ${gcp_project} ]; then
-      echo "${gcp_project}|${gcp_account}"
+      echo "${gcp_project}(${gcp_account}"
     fi
   fi
 }
-GCPROMPT='☁️ %F{cyan}[`gcp_info`]%f'
+GCPROMPT='%F{cyan}GCP: `gcp_info`)%f'
 
-PROMPT=${GCPROMPT}" ${K8SPROMPT}
+PROMPT=${GCPROMPT}"
+${K8SPROMPT}
 ${PROMPT}"
 
 # ESC + 「x」キーを入力し「testris」と入力
