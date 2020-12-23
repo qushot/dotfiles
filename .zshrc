@@ -105,11 +105,7 @@ export PATH="$PATH:~/Library/Application Support/JetBrains/Toolbox/cli"
 #node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-# Git
-export PATH="/usr/local/Cellar/git/2.19.1/bin:$PATH"
-
 # Go
-export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
