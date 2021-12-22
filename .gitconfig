@@ -6,6 +6,7 @@
 	s = status
 	a = add
 	cob = checkout -b
+	cop = !git checkout $(git branch | peco)
 	d = !git diff $(git status | grep modified: | sed -e 's/modified://g' | peco)
 	dc = diff --cached
 	b = branch
@@ -33,3 +34,5 @@
 [ghq]
 	root = ~/go/src
 	root = ~/.ghq
+[init]
+	defaultBranch = main
