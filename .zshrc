@@ -109,6 +109,9 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# myself script
+export PATH=$PATH:$HOME/shellscript/bin
+
 # gcloud
 export CLOUDSDK_PYTHON=python3
 
@@ -219,3 +222,13 @@ cdpath=(
 # if [[ ! -d ~/.zplug ]];then
   # git clone https://github.com/zplug/zplug ~/.zplug
 # fi
+
+# Java 11
+export JAVA_HOME=`/usr/libexec/java_home -v 11`
+PATH=${JAVA_HOME}/bin:${PATH}
+
+# Flutter
+export PATH="$PATH:$HOME/sdk/flutter/bin"
+
+# Apigee/Sackmesser
+export PATH="$PATH:$HOME/shellscript/devrel/tools/apigee-sackmesser/bin"
