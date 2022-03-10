@@ -29,7 +29,6 @@ brew "zsh"
 brew "zsh-completions"
 brew "sanemat/font/ricty", args: ["with-powerline"]
 cask "adoptopenjdk8"
-cask "docker"
 cask "google-chrome"
 cask "google-japanese-ime"
 cask "hyper"
