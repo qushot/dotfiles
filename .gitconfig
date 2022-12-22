@@ -7,6 +7,9 @@
 	a = add
 	cob = checkout -b
 	cop = !git checkout $(git branch | peco)
+	sw = switch
+	swc = switch -c
+	swp = !git switch $(git branch | peco)
 	d = !git diff $(git status | grep modified: | sed -e 's/modified://g' | peco)
 	dc = diff --cached
 	b = branch
@@ -16,7 +19,7 @@
 	# ps = !git push origin git rev-parse --abbrev-ref HEAD
     # pl = !git pull origin git rev-parse --abbrev-ref HEAD
     # tps = !git tag cat version.txt && git push origin --tags
-	delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -p -I % git branch -d %
+	delete-merged-branches = !git branch --merged | grep -vE '^\\*|main$|master$|develop$' | xargs -p -I % git branch -d %
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process

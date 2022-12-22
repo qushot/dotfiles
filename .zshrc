@@ -36,6 +36,11 @@ if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+export DOCKER_HOST=unix://$HOME/.rd/docker.sock
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
@@ -120,6 +125,7 @@ export PATH=$PATH:$HOME/shellscript/bin
 # gcloud
 export CLOUDSDK_PYTHON=python3
 
+alias git="git-switch-trainer"
 alias lla="ls -la"
 alias g="git"
 
@@ -179,6 +185,9 @@ alias kctxp='kctx $(kctx | peco)'
 alias kns="kubens"
 ###-end-ng-completion###
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+# curl
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # https://cloud.google.com/run/docs/authenticating/developers?hl=ja
 alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
@@ -240,3 +249,13 @@ export PATH="$PATH:$HOME/shellscript/devrel/tools/apigee-sackmesser/bin"
 
 # iTerm2
 test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
+
+# direnv
+eval "$(direnv hook zsh)"
+
+#PATH=~/.docker/cli-plugins:${PATH}
+
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export PATH="/usr/local/opt/libpq/bin:$PATH"
