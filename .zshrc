@@ -125,7 +125,7 @@ export PATH=$PATH:$HOME/shellscript/bin
 # gcloud
 export CLOUDSDK_PYTHON=python3
 
-alias git="git-switch-trainer"
+# alias git="git-switch-trainer"
 alias lla="ls -la"
 alias g="git"
 
