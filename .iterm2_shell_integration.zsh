@@ -148,7 +148,7 @@ if [[ -o interactive ]]; then
       iterm2_set_user_var goVersion $(go version | awk '{print $3}')
 
       # Kubernetes Info
-      iterm2_set_user_var k8sInfo "$(kubectx -c)($(kubens -c))"
+      iterm2_set_user_var k8sInfo "$(kubectx -c 2>&1 | tail -n 1)($(kubens -c 2>&1 | tail -n 1))"
     
       # GCP Info
       if [ -f "$HOME/.config/gcloud/active_config" ]; then
