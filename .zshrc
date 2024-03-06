@@ -55,7 +55,14 @@ complete -o default -F __start_kubectl k
 # Terraform
 alias t=terraform
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# GHQ
+export GHQ_ROOT=$HOME/workspace
+# GHQ_ROOTのディレクトリが無ければ作成
+if [[ ! -d ${GHQ_ROOT} ]];then
+  mkdir ${GHQ_ROOT}
+fi
 
 ##### https://gist.github.com/yuttie/2aeaecdba24256c73bf2 #####
 # Search shell history with peco: https://github.com/peco/peco
@@ -87,15 +94,10 @@ if which peco &> /dev/null; then
   bindkey '^V' peco_select_gcloud_config
 fi
 
-# .ghqディレクトリが無ければ作成
-if [[ ! -d ~/.ghq ]];then
-  mkdir ~/.ghq
-fi
-
 function peco_cd_ghq_list() {
-  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  local selected_dir=$(ghq list | peco --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
-    BUFFER="cd ${selected_dir}"
+    BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
     zle accept-line
   fi
   zle clear-screen
@@ -117,13 +119,15 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$HOME/sdk/go1.22.1/bin
+export PATH=$PATH:$GOBIN
 
 # myself script
 export PATH=$PATH:$HOME/shellscript/bin
 
 # gcloud
-export CLOUDSDK_PYTHON=python3
+export CLOUDSDK_PYTHON=python3.9
 
 # alias git="git-switch-trainer"
 alias lla="ls -la"
@@ -237,8 +241,8 @@ cdpath=(
   # git clone https://github.com/zplug/zplug ~/.zplug
 # fi
 
-# Java 11
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
+# Java 17
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
 PATH=${JAVA_HOME}/bin:${PATH}
 
 # Flutter
@@ -259,3 +263,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+# n
+export N_PREFIX="$HOME/.n"
+export PATH="$PATH:$N_PREFIX/bin"

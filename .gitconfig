@@ -19,6 +19,7 @@
 	# ps = !git push origin git rev-parse --abbrev-ref HEAD
     # pl = !git pull origin git rev-parse --abbrev-ref HEAD
     # tps = !git tag cat version.txt && git push origin --tags
+	test-add-commit-push = !git add -A && git commit -m \"test commit $(date '+%Y-%m-%d %H:%M:%S')\" && git push origin $(git rev-parse --abbrev-ref HEAD)
 	delete-merged-branches = !git branch --merged | grep -vE '^\\*|main$|master$|develop$' | xargs -p -I % git branch -d %
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -35,7 +36,6 @@
 [pull]
 	rebase = false
 [ghq]
-	root = ~/go/src
-	root = ~/.ghq
+	root = ~/workspace
 [init]
 	defaultBranch = main
