@@ -105,6 +105,9 @@ function peco_cd_ghq_list() {
 zle -N peco_cd_ghq_list
 bindkey '^]' peco_cd_ghq_list
 
+# ghqでcloneしたリポジトリをpecoで選択してブラウザで開く
+alias ghb='gh browse --repo $(ghq list | peco)'
+
 # General
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/bin
