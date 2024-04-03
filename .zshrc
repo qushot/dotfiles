@@ -36,6 +36,15 @@ if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+# brewでインストールしたツールの補完(多分)
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="$HOME/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
@@ -95,9 +104,11 @@ if which peco &> /dev/null; then
 fi
 
 function peco_cd_ghq_list() {
-  local selected_dir=$(ghq list | peco --query "$LBUFFER")
+  local ignore_dir="src/github.com"
+  local selected_dir=$(ghq list | sed "s|^${ignore_dir}/||g" | peco --query "$LBUFFER")
+  # local selected_dir=$(ghq list | sed 's|^src/github.com/||g' | peco --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
-    BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
+    BUFFER=" cd ${GHQ_ROOT}/${ignore_dir}/${selected_dir}"
     zle accept-line
   fi
   zle clear-screen
@@ -121,10 +132,12 @@ export PATH="$PATH:~/Library/Application Support/JetBrains/Toolbox/cli"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Go
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$HOME/sdk/go1.22.1/bin
+export GOPATH=$HOME/workspace
+export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
+export GOVERSION=1.22.1
+export GOSDK=$HOME/sdk/go$GOVERSION
+export PATH=$PATH:$GOSDK/bin
 
 # myself script
 export PATH=$PATH:$HOME/shellscript/bin
