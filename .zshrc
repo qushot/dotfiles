@@ -67,7 +67,7 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # GHQ
-export GHQ_ROOT=$HOME/workspace
+export GHQ_ROOT=$HOME/workspace/src
 # GHQ_ROOTのディレクトリが無ければ作成
 if [[ ! -d ${GHQ_ROOT} ]];then
   mkdir ${GHQ_ROOT}
@@ -104,11 +104,10 @@ if which peco &> /dev/null; then
 fi
 
 function peco_cd_ghq_list() {
-  local ignore_dir="src/github.com"
-  local selected_dir=$(ghq list | sed "s|^${ignore_dir}/||g" | peco --query "$LBUFFER")
-  # local selected_dir=$(ghq list | sed 's|^src/github.com/||g' | peco --query "$LBUFFER")
+  # local ignore_dir="src/github.com"
+  local selected_dir=$(ghq list | peco --prompt "GHQ>")
   if [ -n "$selected_dir" ]; then
-    BUFFER=" cd ${GHQ_ROOT}/${ignore_dir}/${selected_dir}"
+    BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
     zle accept-line
   fi
   zle clear-screen
@@ -133,8 +132,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Go
 export GOPATH=$HOME/workspace
-export GOBIN=$HOME/go/bin
-export PATH=$PATH:$GOBIN
 export GOVERSION=1.22.1
 export GOSDK=$HOME/sdk/go$GOVERSION
 export PATH=$PATH:$GOSDK/bin
