@@ -104,7 +104,6 @@ if which peco &> /dev/null; then
 fi
 
 function peco_cd_ghq_list() {
-  # local ignore_dir="src/github.com"
   local selected_dir=$(ghq list | peco --prompt "GHQ>")
   if [ -n "$selected_dir" ]; then
     BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
