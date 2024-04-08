@@ -130,10 +130,20 @@ export PATH="$PATH:~/Library/Application Support/JetBrains/Toolbox/cli"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Go
-export GOPATH=$HOME/workspace
-export GOVERSION=1.22.1
+export GOPATH=$HOME/workspace # default: $HOME/go
+export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
+export PATH=$PATH:$GOBIN
+export GOVERSION=1.22.2
 export GOSDK=$HOME/sdk/go$GOVERSION
-export PATH=$PATH:$GOSDK/bin
+export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
+
+function print_managing_go_sdk() {
+  echo "Managing Go SDK (https://go.dev/doc/manage-install)"
+  echo "  go install golang.org/dl/goX.YY.ZZ@latest"
+  echo "  goX.YY.ZZ download"
+  echo "  goX.YY.ZZ version"
+}
+
 
 # myself script
 export PATH=$PATH:$HOME/shellscript/bin
