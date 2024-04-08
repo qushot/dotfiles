@@ -31,18 +31,13 @@ setopt hist_find_no_dups #### 履歴検索中、重複を飛ばす
 setopt hist_reduce_blanks ### ヒストリに保存するときに余分なスペースを削除する
 setopt hist_no_store ######## historyコマンドは記録しない
 
-# zsh-completionsの設定
-if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-
-# brewでインストールしたツールの補完(多分)
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
+  # zsh-completionsの設定
+  FPATH="$(brew --prefix)/share/zsh-completions:${FPATH}"
+  # brewでインストールしたツールの補完(多分)
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-  autoload -Uz compinit
-  compinit
+  autoload -Uz compinit && compinit
 fi
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
