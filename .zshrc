@@ -31,13 +31,14 @@ setopt hist_find_no_dups #### 履歴検索中、重複を飛ばす
 setopt hist_reduce_blanks ### ヒストリに保存するときに余分なスペースを削除する
 setopt hist_no_store ######## historyコマンドは記録しない
 
-if type brew &>/dev/null; then
-  # zsh-completionsの設定
-  FPATH="$(brew --prefix)/share/zsh-completions:${FPATH}"
-  # brewでインストールしたツールの補完(多分)
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+# zsh-completionsによる補完
+if [ -e $(brew --prefix)/share/zsh-completions ]; then
+    FPATH="$(brew --prefix)/share/zsh-completions:${FPATH}"
+fi
 
-  autoload -Uz compinit && compinit
+# brewでインストールしたツールの補完(多分)
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
@@ -60,6 +61,8 @@ complete -o default -F __start_kubectl k
 alias t=terraform
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+autoload -Uz compinit && compinit -u
 
 # GHQ
 export GHQ_ROOT=$HOME/workspace/src
@@ -149,8 +152,6 @@ export CLOUDSDK_PYTHON=python3.9
 # alias git="git-switch-trainer"
 alias lla="ls -la"
 alias g="git"
-
-autoload -U compinit && compinit -u
 
 # used /usr/local/bin/pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
