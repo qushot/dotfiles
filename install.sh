@@ -18,11 +18,15 @@ ln -sf $DOTFILES_DIR/prompt_qushot_setup ~/.zprezto/modules/prompt/functions/pro
 ln -sf $DOTFILES_DIR/.vimrc ~/.vimrc
 ln -sf $DOTFILES_DIR/.zshrc ~/.zshrc
 ln -sf $DOTFILES_DIR/.zpreztorc ~/.zpreztorc
-ln -sf $DOTFILES_DIR/.gitconfig ~/.gitconfig
-ln -sf $DOTFILES_DIR/.gitignore_global ~/.gitignore_global
 
+# git
+if [ ! -e ~/.config/git ]; then
+  mkdir -p ~/.config/git
+fi
+ln -sf $DOTFILES_DIR/git/config ~/.config/git/config
+ln -sf $DOTFILES_DIR/git/ignore ~/.config/git/ignore
 # Create .gitconfig.local
-GIT_CONFIG_LOCAL=~/.gitconfig.local
+GIT_CONFIG_LOCAL=~/.config/git/config.local
 if [ ! -e $GIT_CONFIG_LOCAL ]; then
   echo -n "git config user.email?> "
   read GIT_AUTHOR_EMAIL
