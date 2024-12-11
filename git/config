@@ -3,6 +3,10 @@
 	cm = commit
 	cma = commit -a
 	cmm = commit -m
+	# 対象のコミットを選択して使う
+	fix = commit --fixup
+	# 対象の一つ前のコミットを選択して使う
+	rai = rebase --autosquash -i
 	s = status
 	a = add
 	cob = checkout -b
@@ -12,9 +16,10 @@
 	swp = !git switch $(git branch | peco)
 	d = !git diff $(git status | grep modified: | sed -e 's/modified://g' | peco)
 	dc = diff --cached
+	gr = grep -i -n
 	b = branch
 	ba = branch -a
-	la = log --oneline
+	la = log -n 45 --oneline
 	puo = push -u origin
 	# ps = !git push origin git rev-parse --abbrev-ref HEAD
     # pl = !git pull origin git rev-parse --abbrev-ref HEAD

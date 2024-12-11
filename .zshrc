@@ -99,18 +99,31 @@ if which peco &> /dev/null; then
   }
   zle -N peco_select_gcloud_config
   bindkey '^V' peco_select_gcloud_config
-fi
 
-function peco_cd_ghq_list() {
-  local selected_dir=$(ghq list | peco --prompt "GHQ>")
-  if [ -n "$selected_dir" ]; then
-    BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N peco_cd_ghq_list
-bindkey '^]' peco_cd_ghq_list
+  function peco_cd_ghq_list() {
+    local selected_dir=$(ghq list | peco --prompt "GHQ>")
+    if [ -n "$selected_dir" ]; then
+      BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
+      zle accept-line
+    fi
+    zle clear-screen
+  }
+  zle -N peco_cd_ghq_list
+  bindkey '^]' peco_cd_ghq_list
+
+  function peco_git_log() {
+    local selected_commit=$(git log --oneline -n 45 | peco | awk '{print $1}')
+    if [ -n "$selected_commit" ]; then
+      BUFFER+="$selected_commit"
+      CURSOR=$#BUFFER
+      zle redisplay
+    fi
+    zle clear-screen
+  }
+  zle -N peco_git_log
+  bindkey '^s' peco_git_log
+
+fi
 
 # ghqでcloneしたリポジトリをpecoで選択してブラウザで開く
 alias ghb='gh browse --repo $(ghq list | peco)'
@@ -131,7 +144,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/workspace # default: $HOME/go
 export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
 export PATH=$PATH:$GOBIN
-export GOVERSION=1.22.2
+export GOVERSION=1.23.0
 export GOSDK=$HOME/sdk/go$GOVERSION
 export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
 
@@ -285,3 +298,13 @@ export PATH="/usr/local/opt/libpq/bin:$PATH"
 # n
 export N_PREFIX="$HOME/.n"
 export PATH="$PATH:$N_PREFIX/bin"
+
+# Rust
+. "$HOME/.cargo/env"
+
+# そのうち消す
+# https://github.com/streamich/git-cz
+export CZ_CONFIG=./changelog.config.js
+
+# プロキシ設定
+source ~/.proxy.zsh
