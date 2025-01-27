@@ -3,6 +3,7 @@
 	cm = commit
 	cma = commit -a
 	cmm = commit -m
+	empty = commit --allow-empty -m 'empty commit'
 	# 対象のコミットを選択して使う
 	fix = commit --fixup
 	# 対象の一つ前のコミットを選択して使う
