@@ -144,7 +144,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/workspace # default: $HOME/go
 export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
 export PATH=$PATH:$GOBIN
-export GOVERSION=1.23.0
+export GOVERSION=1.23.5
 export GOSDK=$HOME/sdk/go$GOVERSION
 export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
 
