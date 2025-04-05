@@ -14,7 +14,6 @@ for rcfile in "${ZDOTDIR:-$DOTFILES_DIR}"/.zprezto/runcoms/^README.md(.N); do
 done
 
 ln -sf $DOTFILES_DIR/.zprezto ~/.zprezto
-ln -sf $DOTFILES_DIR/prompt_qushot_setup ~/.zprezto/modules/prompt/functions/prompt_qushot_setup
 ln -sf $DOTFILES_DIR/.vimrc ~/.vimrc
 ln -sf $DOTFILES_DIR/.zshrc ~/.zshrc
 ln -sf $DOTFILES_DIR/.zpreztorc ~/.zpreztorc
