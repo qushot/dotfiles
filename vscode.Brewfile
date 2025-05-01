@@ -1,0 +1,5 @@
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "ms-ceintl.vscode-language-pack-ja"
+vscode "rust-lang.rust-analyzer"
+vscode "usernamehw.errorlens"
