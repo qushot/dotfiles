@@ -15,3 +15,13 @@
 
 ### シンボリックリンクの解除
 `ln -sf "src/file" "dest/file"` でシンボリックリンクを作成した場合、 `unlink "dest/file"` で解除する。
+
+## Visual Studio Code
+### 設定
+```sh
+# settings.json
+$ ln -sf "$(pwd)/vscode/settings.json" "$HOME/.config/Code/User/settings.json"`
+```
+
+### メモ
+ユーザースニペットは使ってなかったけど、便利そうだなと思った https://qiita.com/12345/items/97ba616d530b4f692c97

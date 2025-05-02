@@ -1,0 +1,20 @@
+{
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        // Ctrl+Altを押下している間のみ、型ヒントを表示する
+        "editor.inlayHints.enabled": "offUnlessPressed"
+    },
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.check.extraArgs": [
+        "--",
+        "-A",
+        "clippy::needless_return"
+    ],
+    "workbench.editor.enablePreview": false,
+    "files.insertFinalNewline": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.agent.enabled": true,
+    "git.confirmSync": false,
+    "git.autofetch": true
+}
