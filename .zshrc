@@ -53,6 +53,23 @@ if command -v brew &>/dev/null; then
     source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# junegunn/fzf (https://github.com/junegunn/fzf)
+if command -v fzf &>/dev/null; then
+    # Set up fzf key bindings and fuzzy completion
+    source <(fzf --zsh)
+
+    # Preview file content using bat (https://github.com/sharkdp/bat)
+    export FZF_CTRL_T_OPTS="
+        --walker-skip .git,node_modules,target
+        --preview 'bat -n --color=always {}'
+        --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+    # Print tree structure in the preview window
+    export FZF_ALT_C_OPTS="
+        --walker-skip .git,node_modules,target
+        --preview 'tree -C {}'"
+fi
+
 # Git
 # NOTE
 # * update: `rm -f ~/.zsh/scripts/git-prompt.sh; curl -o ~/.zsh/scripts/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh`
