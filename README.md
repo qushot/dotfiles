@@ -25,3 +25,6 @@ $ ln -sf "$(pwd)/vscode/settings.json" "$HOME/.config/Code/User/settings.json"`
 
 ### メモ
 ユーザースニペットは使ってなかったけど、便利そうだなと思った https://qiita.com/12345/items/97ba616d530b4f692c97
+
+## TODO
+* https://github.com/olets/zsh-abbr は入れていいかも
