@@ -14,4 +14,4 @@
 * `-o pipefail`: パイプライン内のどのコマンドが失敗しても、全体を失敗とみなす。
 
 ### シンボリックリンクの解除
-`ln -sf "foo/file" "bar/file"` でシンボリックリンクを作成した場合、 `unlink "bar/file"` で解除する。
+`ln -sf "src/file" "dest/file"` でシンボリックリンクを作成した場合、 `unlink "dest/file"` で解除する。
