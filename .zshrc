@@ -71,6 +71,37 @@ if [[ ! -d ${GHQ_ROOT} ]];then
   mkdir ${GHQ_ROOT}
 fi
 
+# fzf
+if command -v fzf &> /dev/null; then
+  # Set up fzf key bindings and fuzzy completion
+  source <(fzf --zsh)
+
+  function fzf_cd_ghq_list() {
+    local selected_dir=$(ghq list | fzf --prompt "GHQ>" --height 50% --layout=reverse --info=inline --preview 'tree -C ${GHQ_ROOT}/{}')
+    if [ -n "$selected_dir" ]; then
+      BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
+      zle accept-line
+    fi
+    zle redisplay
+  }
+  zle -N fzf_cd_ghq_list
+  bindkey '^]' fzf_cd_ghq_list
+
+  function fzf_git_log() {
+    local selected_commit=$(git log --oneline -n 45 | fzf --height 50% --layout=reverse --info=inline | awk '{print $1}')
+    if [ -n "$selected_commit" ]; then
+      # バッファの現在のカーソル位置にコミットハッシュを挿入
+      BUFFER="${BUFFER:0:$CURSOR}${selected_commit}${BUFFER:$CURSOR}"
+      # カーソル位置を挿入したコミットハッシュの直後に移動
+      CURSOR=$(($CURSOR + ${#selected_commit}))
+    fi
+    zle redisplay
+  }
+  zle -N fzf_git_log
+  bindkey '^s' fzf_git_log
+
+fi
+
 ##### https://gist.github.com/yuttie/2aeaecdba24256c73bf2 #####
 # Search shell history with peco: https://github.com/peco/peco
 # Adapted from: https://github.com/mooz/percol#zsh-history-search
@@ -99,29 +130,6 @@ if which peco &> /dev/null; then
   }
   zle -N peco_select_gcloud_config
   bindkey '^V' peco_select_gcloud_config
-
-  function peco_cd_ghq_list() {
-    local selected_dir=$(ghq list | peco --prompt "GHQ>")
-    if [ -n "$selected_dir" ]; then
-      BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
-      zle accept-line
-    fi
-    zle clear-screen
-  }
-  zle -N peco_cd_ghq_list
-  bindkey '^]' peco_cd_ghq_list
-
-  function peco_git_log() {
-    local selected_commit=$(git log --oneline -n 45 | peco | awk '{print $1}')
-    if [ -n "$selected_commit" ]; then
-      BUFFER+="$selected_commit"
-      CURSOR=$#BUFFER
-      zle redisplay
-    fi
-    zle clear-screen
-  }
-  zle -N peco_git_log
-  bindkey '^s' peco_git_log
 
 fi
 
