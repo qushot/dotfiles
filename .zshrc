@@ -77,7 +77,7 @@ if command -v fzf &> /dev/null; then
   source <(fzf --zsh)
 
   function fzf_cd_ghq_list() {
-    local selected_dir=$(ghq list | fzf --prompt "GHQ>" --height 50% --layout=reverse --info=inline --preview 'tree -C ${GHQ_ROOT}/{}')
+    local selected_dir=$(ghq list | fzf --prompt "GHQ>" --height 50% --layout=reverse --info=inline --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
       BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
       zle accept-line
