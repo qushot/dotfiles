@@ -71,15 +71,45 @@ if [[ ! -d ${GHQ_ROOT} ]];then
   mkdir ${GHQ_ROOT}
 fi
 
-# fzf
+# fzf (ref: https://junegunn.github.io/fzf/reference/)
 if command -v fzf &> /dev/null; then
   # Set up fzf key bindings and fuzzy completion
   source <(fzf --zsh)
 
+  function fzf_select_history() {
+    local tac
+    { which gtac &> /dev/null && tac="gtac" } || \
+      { which tac &> /dev/null && tac="tac" } || \
+      tac="tail -r"
+    local selected_command=$(fc -l -n 1 | eval $tac | fzf --query "${LBUFFER}" --height 50% --layout=reverse --info=inline)
+    if [ -n "${selected_command}" ]; then
+      BUFFER="${selected_command}"
+      CURSOR=$(($CURSOR + ${#selected_command}))
+    else
+      BUFFER="${LBUFFER}"
+    fi
+    zle redisplay
+  }
+  zle -N fzf_select_history
+  bindkey '^R' fzf_select_history
+
+  function fzf_select_gcloud_config() {
+    local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" --height 50% --layout=reverse --info=inline | awk '{print $1}')
+    if [ -n "${confname}" ]; then
+      BUFFER="gcloud config configurations activate ${confname}"
+      zle accept-line
+    else
+      BUFFER="${LBUFFER}"
+    fi
+    zle redisplay
+  }
+  zle -N fzf_select_gcloud_config
+  bindkey '^V' fzf_select_gcloud_config
+
   function fzf_cd_ghq_list() {
-    local selected_dir=$(ghq list | fzf --prompt "GHQ>" --height 50% --layout=reverse --info=inline --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.git|node_modules|target" -N')
+    local selected_dir=$(ghq list | fzf --height 50% --layout=reverse --info=inline --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
-      BUFFER=" cd ${GHQ_ROOT}/${selected_dir}"
+      BUFFER="cd ${GHQ_ROOT}/${selected_dir}"
       zle accept-line
     fi
     zle redisplay
@@ -106,35 +136,9 @@ fi
 # Search shell history with peco: https://github.com/peco/peco
 # Adapted from: https://github.com/mooz/percol#zsh-history-search
 if which peco &> /dev/null; then
-  function peco_select_history() {
-    local tac
-    { which gtac &> /dev/null && tac="gtac" } || \
-      { which tac &> /dev/null && tac="tac" } || \
-      tac="tail -r"
-    BUFFER=$(fc -l -n 1 | eval $tac | \
-                peco --query "$LBUFFER")
-    CURSOR=$#BUFFER # move cursor
-    zle -R -c       # refresh
-  }
-
-  zle -N peco_select_history
-  bindkey '^R' peco_select_history
-
-  function peco_select_gcloud_config() {
-    local confname=$(gcloud config configurations list | tail -n +2 | peco --query "$LBUFFER" | awk '{print $1}')
-    if [ -n "${confname}" ]; then
-      BUFFER="gcloud config configurations activate ${confname}"
-      zle accept-line
-      zle -R -c       # refresh
-    fi
-  }
-  zle -N peco_select_gcloud_config
-  bindkey '^V' peco_select_gcloud_config
-
+  # ghqでcloneしたリポジトリをpecoで選択してブラウザで開く
+  alias ghb='gh browse --repo $(ghq list | peco)'
 fi
-
-# ghqでcloneしたリポジトリをpecoで選択してブラウザで開く
-alias ghb='gh browse --repo $(ghq list | peco)'
 
 # General
 export PATH=$PATH:/usr/local/bin
