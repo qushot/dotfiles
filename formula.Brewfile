@@ -1,6 +1,8 @@
 brew "ca-certificates"
 brew "bat"
+brew "fzf"
 brew "gcc"
+brew "ghq"
 brew "git"
 brew "jq"
 brew "tree"
