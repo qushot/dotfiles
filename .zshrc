@@ -20,10 +20,10 @@ for dir in "${ZSH_DIRS[@]}"; do
     fi
 done
 
-# Set up Homebrew environment variables
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 if command -v brew &>/dev/null; then
+    # Set up Homebrew environment variables
+    eval "$(brew shellenv)"
+
     # zsh-completions
     # NOTE: You may also need to force rebuild `zcompdump`: rm -f ~/.zcompdump; compinit
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
