@@ -1,0 +1,5 @@
+abbr e='exec $SHELL -l'
+abbr mkdir='mkdir -p'
+abbr hoge='echo hoge'
+# abbr 'g s'='git status'
+
