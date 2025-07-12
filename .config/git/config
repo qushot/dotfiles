@@ -1,3 +1,6 @@
+[user]
+	name = qushot
+	email = 28912882+qushot@users.noreply.github.com
 [alias]
 	co = checkout
 	cm = commit
@@ -34,8 +37,6 @@
 	clean = git-lfs clean -- %f
 [core]
 	autocrlf = input
-[include]
-	path = ~/.config/git/local
 [commit]
 	template = ~/.stCommitMsg
 [pull]
