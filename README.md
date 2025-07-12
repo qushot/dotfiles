@@ -28,3 +28,6 @@ $ ln -sf "$(pwd)/vscode/settings.json" "$HOME/.config/Code/User/settings.json"`
 
 ## TODO
 * https://github.com/olets/zsh-abbr は入れていいかも
+
+## 良さげな記事
+* [dotfilesのこだわりを晒す - エムスリーテックブログ](https://www.m3tech.blog/entry/dotfiles-bonsai)
