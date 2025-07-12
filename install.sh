@@ -1,14 +1,19 @@
 #!/bin/bash
 set -euxo pipefail
 
-# TODO: homebrew のインストール
-if ! command -v brew &>/dev/null; then
-    echo "brew がインストールされていません。"
+echo "今は使えません！！"
+exit 1
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# Set up the ZDOTDIR environment variable
+echo "Setting up ZDOTDIR..."
+echo export ZDOTDIR=\"\$HOME\"/.config/zsh | sudo tee -a /etc/zshenv
+
+# Install Homebrew
+echo "Installing Homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # ファイル・ディレクトリのリンクを作成
+# TODO: .config 配下のファイルを増やしたので要変更
 files_to_link=(
     ".zshrc"
     ".config/git"
@@ -17,31 +22,34 @@ for file in "${files_to_link[@]}"; do
     ln -sf "$(pwd)/$file" "$HOME/$file"
 done
 
-GIT_CONFIG_LOCAL=~/.config/git/local
-if [ ! -e $GIT_CONFIG_LOCAL ]; then
-  echo -n "git config user.email?> "
-  read GIT_AUTHOR_EMAIL
+# 不要
+# GIT_CONFIG_LOCAL=~/.config/git/local
+# if [ ! -e $GIT_CONFIG_LOCAL ]; then
+#   echo -n "git config user.email?> "
+#   read GIT_AUTHOR_EMAIL
 
-  echo -n "git config user.name?> "
-  read GIT_AUTHOR_NAME
+#   echo -n "git config user.name?> "
+#   read GIT_AUTHOR_NAME
 
-  cat << EOF > $GIT_CONFIG_LOCAL
-[user]
-    name = $GIT_AUTHOR_NAME
-    email = $GIT_AUTHOR_EMAIL
-EOF
-fi
+#   cat << EOF > $GIT_CONFIG_LOCAL
+# [user]
+#     name = $GIT_AUTHOR_NAME
+#     email = $GIT_AUTHOR_EMAIL
+# EOF
+# fi
 
 # zsh 関連のものをインストールする
 # TODO: -> 普通に brew bundle でインストールしても良い気がした
+brew bundle --global --file=.Brewfile
 # brew bundle --file=formula.Brewfile
 # brew bundle --file=vscode.Brewfile
-brew install zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting
 
 # /etc/shells に zsh を追加
 command -v zsh | sudo tee -a /etc/shells
+
 # zsh をデフォルトシェルに変更
-sudo chsh -s "$(command -v zsh)"
+# sudo chsh -s "$(command -v zsh)" # たぶん sudo しなくても良い
+chsh -s "$(command -v zsh)"
 
 # TODO: Macの場合は defaults_write.sh を実行するように
 # sh defaults_write.sh
