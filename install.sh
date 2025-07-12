@@ -53,8 +53,13 @@ command -v zsh | sudo tee -a /etc/shells
 # sudo chsh -s "$(command -v zsh)" # たぶん sudo しなくても良い
 chsh -s "$(command -v zsh)"
 
-# TODO: Macの場合は defaults_write.sh を実行するように
-# sh defaults_write.sh
+# macOS の場合は defaults_write.sh を実行する
+# WARN: 動作未確認
+case "$OSTYPE" in
+  darwin*)
+    sh defaults_write.sh
+    ;;
+esac
 
 # 再起動
 # sudo shutdown -r now
