@@ -12,6 +12,8 @@ echo export ZDOTDIR=\"\$HOME\"/.config/zsh | sudo tee -a /etc/zshenv
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# TODO: XDG Base Directory specification 関連のディレクトリ作成
+
 # ファイル・ディレクトリのリンクを作成
 # TODO: .config 配下のファイルを増やしたので要変更
 files_to_link=(
