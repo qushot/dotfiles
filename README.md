@@ -31,3 +31,4 @@ $ ln -sf "$(pwd)/vscode/settings.json" "$HOME/.config/Code/User/settings.json"`
 
 ## 良さげな記事
 * [dotfilesのこだわりを晒す - エムスリーテックブログ](https://www.m3tech.blog/entry/dotfiles-bonsai)
+* [ひさしぶりにzshに戻りました](https://blog.nishimu.land/entry/2022/03/21/003009)
