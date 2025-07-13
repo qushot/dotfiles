@@ -7,3 +7,6 @@ case "$OSTYPE" in
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ;;
 esac
+
+# Show the current zsh version
+zsh --version

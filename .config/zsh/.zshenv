@@ -5,13 +5,16 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Zsh environment settings
-# export EDITOR="vim" # 何故か Ctrl+N,P,B,F,A,E などが効かなくなる
-# export VISUAL="vim" # 何故か Ctrl+N,P,B,F,A,E などが効かなくなる
+export EDITOR="vim"
+export VISUAL="vim"
 export ZCOMPDUMP_DIR="$XDG_CACHE_HOME/zsh"
 export ZCOMPDUMP_FILE="$ZCOMPDUMP_DIR/zcompdump-$ZSH_VERSION"
 
 # History settings
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+
+# Homebrew
+export HOMEBREW_BUNDLE_FILE_GLOBAL="$XDG_CONFIG_HOME"/homebrew/Brewfile
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker

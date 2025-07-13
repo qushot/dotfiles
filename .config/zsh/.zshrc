@@ -1,6 +1,10 @@
 # Zsh configuration file
 
-setopt PROMPT_SUBST
+# emacs key bindings (NOTE: `EDITOR=vim` defaults to vi key bindings, so need changing to emacs key bindings)
+bindkey -e
+
+setopt INTERACTIVE_COMMENTS # interactiveモードでの#コメントを有効化
+setopt PROMPT_SUBST # プロンプトで変数を展開する
 
 autoload -Uz add-zsh-hook
 
@@ -68,6 +72,8 @@ for dir in "${ZSH_DIRS[@]}"; do
     fi
 done
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
 if command -v brew &>/dev/null; then
     # zsh-completions
     # NOTE: You may also need to force rebuild `zcompdump`: rm -f "$ZCOMPDUMP_FILE"; compinit -d "$ZCOMPDUMP_FILE"
@@ -85,7 +91,7 @@ if command -v brew &>/dev/null; then
     # FPATH=$(brew --prefix)/share/zsh-completions:$FPATH # 不要？
 
     # Custom completions
-    FPATH="$HOME/.zsh/completions:$FPATH"
+    FPATH="$HOME/.zsh/completions:$FPATH" # TODO: fpath に追加すべき
     # NOTE: Managing custom completions
     # * docker: `rm -f ~/.zsh/completions/_docker; docker completion zsh > ~/.zsh/completions/_docker`
     # * rustup: `rm -f ~/.zsh/completions/_rustup; rustup completions zsh > ~/.zsh/completions/_rustup`
@@ -169,6 +175,7 @@ add-zsh-hook precmd __precmd_add_newline
 
 # Go
 export GOPATH=$HOME/workspace # default: $HOME/go
+# export GOPATH="$XDG_DATA_HOME"/go
 export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
 export PATH=$PATH:$GOBIN
 export GOVERSION=1.24.5
