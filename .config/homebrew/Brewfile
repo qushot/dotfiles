@@ -1,15 +1,36 @@
+# Mozilla CA certificate store
 brew "ca-certificates"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU compiler collection
 brew "gcc"
+# GitHub command-line tool
 brew "gh"
+# Remote repository management made easy
 brew "ghq"
+# Distributed revision control system
 brew "git"
+# Render markdown on the CLI
 brew "glow"
+# Make JSON greppable
+brew "gron"
+# Like cURL, but for gRPC
+brew "grpcurl"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Rust toolchain installer
 brew "rustup"
+# Fast, configurable, shell plugin manager
 brew "sheldon"
+# Tail multiple Kubernetes pods & their containers
+brew "stern"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Vi 'workalike' with many additional features
 brew "vim"
+# Check your $HOME for unwanted files and directories
 brew "xdg-ninja"
+# UNIX shell (command interpreter)
 brew "zsh"
