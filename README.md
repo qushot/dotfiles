@@ -1,5 +1,8 @@
 # dotfiles_ubuntu
 
+## GitHub Actions での自動テスト
+* [GitHub Actions で dotfiles を自動テスト](https://qiita.com/rtakasuke/items/85133e396ba766458c20)
+
 ## Homebrew 関連のメモ
 ### dump 時に種類で分割可能
 * `brew bundle dump --formula --file formula.Brewfile`
