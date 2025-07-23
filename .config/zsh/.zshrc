@@ -91,11 +91,14 @@ if command -v brew &>/dev/null; then
     # FPATH=$(brew --prefix)/share/zsh-completions:$FPATH # 不要？
 
     # Custom completions
-    FPATH="$XDG_CACHE_HOME/zsh/completions:$FPATH" # TODO: fpath に追加すべき
     if [[ ! -d "$XDG_CACHE_HOME/zsh/completions" ]]; then
         echo "Creating custom completions directory: $XDG_CACHE_HOME/zsh/completions"
         mkdir -p "$XDG_CACHE_HOME/zsh/completions"
     fi
+    fpath=(
+        "$XDG_CACHE_HOME/zsh/completions"
+        $fpath
+    )
     # NOTE: Managing custom completions
     # * docker: `rm -f $XDG_CACHE_HOME/zsh/completions/_docker; docker completion zsh > $XDG_CACHE_HOME/zsh/completions/_docker`
     # * rustup: `rm -f $XDG_CACHE_HOME/zsh/completions/_rustup; rustup completions zsh > $XDG_CACHE_HOME/zsh/completions/_rustup`
