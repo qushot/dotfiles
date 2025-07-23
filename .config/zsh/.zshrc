@@ -1,3 +1,4 @@
+echo "loaded .zshrc"
 # Zsh configuration file
 
 # emacs key bindings (NOTE: `EDITOR=vim` defaults to vi key bindings, so need changing to emacs key bindings)

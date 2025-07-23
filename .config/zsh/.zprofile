@@ -1,3 +1,4 @@
+echo "loaded .zprofile"
 # Set up Homebrew environment variables
 case "$OSTYPE" in
   darwin*)
