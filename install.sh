@@ -30,22 +30,6 @@ ln -sfv $(pwd)/.config/* ${XDG_CONFIG_HOME}
 # 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
 # for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
-# 不要
-# GIT_CONFIG_LOCAL=~/.config/git/local
-# if [ ! -e $GIT_CONFIG_LOCAL ]; then
-#   echo -n "git config user.email?> "
-#   read GIT_AUTHOR_EMAIL
-
-#   echo -n "git config user.name?> "
-#   read GIT_AUTHOR_NAME
-
-#   cat << EOF > $GIT_CONFIG_LOCAL
-# [user]
-#     name = $GIT_AUTHOR_NAME
-#     email = $GIT_AUTHOR_EMAIL
-# EOF
-# fi
-
 # zsh 関連のものをインストールする
 # TODO: -> 普通に brew bundle でインストールしても良い気がした
 brew bundle --global --file=.Brewfile
