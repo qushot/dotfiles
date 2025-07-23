@@ -26,7 +26,7 @@ mkdir -p \
 
 # .config 配下のディレクトリをリンク
 # TODO: dotfiles のディレクトリに移動する必要がありそう
-ln -sfv $(pwd)/.config/* ${XDG_CONFIG_HOME}
+ln -sfv $(pwd)/config/* ${XDG_CONFIG_HOME}
 # 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
 # for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
