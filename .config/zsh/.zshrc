@@ -87,8 +87,6 @@ if command -v brew &>/dev/null; then
     zstyle ':completion:*' use-cache on
     # Set the cache path for completion candidates
     zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-    
-    # FPATH=$(brew --prefix)/share/zsh-completions:$FPATH # 不要？
 
     # Custom completions
     if [[ ! -d "$XDG_CACHE_HOME/zsh/completions" ]]; then
@@ -106,20 +104,6 @@ if command -v brew &>/dev/null; then
 
     autoload -Uz compinit
     compinit -d "$ZCOMPDUMP_FILE"
-
-    # zsh-autosuggestions
-    # if [[ ! -f $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-    #     echo "zsh-autosuggestions not found, installing..."
-    #     brew install zsh-autosuggestions
-    # fi
-    # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-    # zsh-syntax-highlighting
-    # if [[ ! -f $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    #     echo "zsh-syntax-highlighting not found, installing..."
-    #     # brew install zsh-syntax-highlighting
-    # fi
-    # source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # junegunn/fzf (https://github.com/junegunn/fzf)
