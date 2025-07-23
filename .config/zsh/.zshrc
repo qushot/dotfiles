@@ -61,7 +61,6 @@ cdpath=(
 
 ZSH_DIRS=(
     "$HOME/.zsh"
-    "$HOME/.zsh/completions"
     "$HOME/.zsh/scripts"
 )
 
@@ -92,11 +91,15 @@ if command -v brew &>/dev/null; then
     # FPATH=$(brew --prefix)/share/zsh-completions:$FPATH # 不要？
 
     # Custom completions
-    FPATH="$HOME/.zsh/completions:$FPATH" # TODO: fpath に追加すべき
+    FPATH="$XDG_CACHE_HOME/zsh/completions:$FPATH" # TODO: fpath に追加すべき
+    if [[ ! -d "$XDG_CACHE_HOME/zsh/completions" ]]; then
+        echo "Creating custom completions directory: $XDG_CACHE_HOME/zsh/completions"
+        mkdir -p "$XDG_CACHE_HOME/zsh/completions"
+    fi
     # NOTE: Managing custom completions
-    # * docker: `rm -f ~/.zsh/completions/_docker; docker completion zsh > ~/.zsh/completions/_docker`
-    # * rustup: `rm -f ~/.zsh/completions/_rustup; rustup completions zsh > ~/.zsh/completions/_rustup`
-    # * cargo: `rm -f ~/.zsh/completions/_cargo; rustup completions zsh cargo > ~/.zsh/completions/_cargo`
+    # * docker: `rm -f $XDG_CACHE_HOME/zsh/completions/_docker; docker completion zsh > $XDG_CACHE_HOME/zsh/completions/_docker`
+    # * rustup: `rm -f $XDG_CACHE_HOME/zsh/completions/_rustup; rustup completions zsh > $XDG_CACHE_HOME/zsh/completions/_rustup`
+    # * cargo: `rm -f $XDG_CACHE_HOME/zsh/completions/_cargo; rustup completions zsh cargo > $XDG_CACHE_HOME/zsh/completions/_cargo`
 
     autoload -Uz compinit
     compinit -d "$ZCOMPDUMP_FILE"
