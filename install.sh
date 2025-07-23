@@ -12,17 +12,23 @@ echo export ZDOTDIR=\"\$HOME\"/.config/zsh | sudo tee -a /etc/zshenv
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# TODO: XDG Base Directory specification 関連のディレクトリ作成
+# XDG Base Directory specification 関連のディレクトリ作成
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
-# ファイル・ディレクトリのリンクを作成
-# TODO: .config 配下のファイルを増やしたので要変更
-files_to_link=(
-    ".zshrc"
-    ".config/git"
-)
-for file in "${files_to_link[@]}"; do
-    ln -sf "$(pwd)/$file" "$HOME/$file"
-done
+mkdir -p \
+    "$XDG_CONFIG_HOME" \
+    "$XDG_CACHE_HOME" \
+    "$XDG_DATA_HOME" \
+    "$XDG_STATE_HOME"
+
+# .config 配下のディレクトリをリンク
+# TODO: dotfiles のディレクトリに移動する必要がありそう
+ln -sfv $(pwd)/.config/* ${XDG_CONFIG_HOME}
+# 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
+# for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
 # 不要
 # GIT_CONFIG_LOCAL=~/.config/git/local
