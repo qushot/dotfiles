@@ -8,13 +8,13 @@
 	fix = commit --fixup
 	# 対象の一つ前のコミットを選択して使う
 	rai = rebase --autosquash -i
-	s = status
+	st = status
 	a = add
 	cob = checkout -b
 	cop = !git checkout $(git branch | peco)
-	sw = switch
-	swc = switch -c
-	swp = !git switch $(git branch | peco)
+	s = switch
+	sc = switch -c
+	sp = !git switch $(git branch | peco)
 	d = !git diff $(git status | grep modified: | sed -e 's/modified://g' | peco)
 	dc = diff --cached
 	gr = grep -i -n
