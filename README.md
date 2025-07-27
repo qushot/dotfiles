@@ -19,6 +19,13 @@
 ### シンボリックリンクの解除
 `ln -sf "src/file" "dest/file"` でシンボリックリンクを作成した場合、 `unlink "dest/file"` で解除する。
 
+## 動作確認用 Ubuntu コンテナ
+```sh
+# 以下では sudo が使えないため、完全な動作確認はできない。
+$ docker run -it --user ubuntu --volume $PWD:/home/ubuntu/$(basename "$PWD"):ro --workdir /home/ubuntu/$(basename "$PWD") --rm ubuntu /bin/bash
+# 動作確認を行うためには、 Dockerfile を別途作成する必要がある。
+```
+
 ## Visual Studio Code
 ### 設定
 ```sh
