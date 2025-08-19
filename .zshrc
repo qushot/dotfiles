@@ -156,17 +156,22 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/workspace # default: $HOME/go
 export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
 export PATH=$PATH:$GOBIN
-export GOVERSION=1.23.5
+export GOVERSION=1.25.0
 export GOSDK=$HOME/sdk/go$GOVERSION
 export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
 
-function print_managing_go_sdk() {
-  echo "Managing Go SDK (https://go.dev/doc/manage-install)"
-  echo "  go install golang.org/dl/goX.YY.ZZ@latest"
-  echo "  goX.YY.ZZ download"
-  echo "  goX.YY.ZZ version"
+function install_go_sdk() {
+  # ref: https://go.dev/doc/manage-install
+  local go_version="$1"
+  if [[ -z "$go_version" ]]; then
+    echo "Usage: install_go_sdk <version>"
+    return 1
+  elif [[ ! "$go_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "Invalid version format. (e.g., 1.23.4)."
+    return 1
+  fi
+  eval "go install golang.org/dl/go$go_version@latest && go$go_version download && go$go_version version"
 }
-
 
 # myself script
 export PATH=$PATH:$HOME/shellscript/bin
