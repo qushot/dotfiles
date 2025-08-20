@@ -169,7 +169,7 @@ export GOPATH=$HOME/workspace # default: $HOME/go
 # export GOPATH="$XDG_DATA_HOME"/go
 export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
 export PATH=$PATH:$GOBIN
-export GOVERSION=1.24.5
+export GOVERSION=1.25.0
 export GOSDK=$HOME/sdk/go$GOVERSION
 export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
 # zsh-completionsで定義されている関数 __go_packages を削除、あるいは無効化したい…
