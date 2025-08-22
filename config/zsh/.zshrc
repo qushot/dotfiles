@@ -4,6 +4,10 @@ echo "loaded .zshrc"
 # emacs key bindings (NOTE: `EDITOR=vim` defaults to vi key bindings, so need changing to emacs key bindings)
 bindkey -e
 
+# Language
+# export LANG=ja_JP.UTF-8 # 文字コードの指定 → 不要っぽい？
+setopt PRINT_EIGHT_BIT # 日本語ファイル名を表示可能にする
+
 setopt INTERACTIVE_COMMENTS # interactiveモードでの#コメントを有効化
 setopt PROMPT_SUBST # プロンプトで変数を展開する
 
@@ -13,6 +17,11 @@ eval "$(sheldon source)"
 
 alias g='git'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+# alias kctx="kubectx"
+# alias kns="kubens"
+# alias kctxp='kctx $(kctx | peco)' # TODO: peco to fzf
+# https://cloud.google.com/run/docs/authenticating/developers?hl=ja
+# alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
 
 # TODO: path, fpath を追加する（存在する時のみ追加される）
 # path=(
@@ -25,8 +34,10 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 #     [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
 # }
 
+autoload -U colors; colors
+
 setopt NO_BEEP     # ビープ音の停止
-setopt NOLISTBEEP  # ビープ音の停止(補完時)
+setopt NO_LIST_BEEP  # ビープ音の停止(補完時)
 
 ### HISTORY ###
 # $XDG_STATE_HOME/zsh ディレクトリが存在しない場合は作成する
@@ -54,6 +65,7 @@ setopt HIST_NO_STORE             # historyコマンドは記録しない
 # https://qiita.com/yaotti/items/157ff0a46736ec793a91
 # .zshenvに書くべき?
 setopt AUTO_CD ############## cdなしでディレクトリ移動
+setopt AUTO_PUSHD ########### cd -<tab>で以前移動したディレクトリを表示
 cdpath=(
   $HOME/go/src/github.com(N-/)
   $cdpath
@@ -101,6 +113,9 @@ if command -v brew &>/dev/null; then
     # * docker: `rm -f $XDG_CACHE_HOME/zsh/completions/_docker; docker completion zsh > $XDG_CACHE_HOME/zsh/completions/_docker`
     # * rustup: `rm -f $XDG_CACHE_HOME/zsh/completions/_rustup; rustup completions zsh > $XDG_CACHE_HOME/zsh/completions/_rustup`
     # * cargo: `rm -f $XDG_CACHE_HOME/zsh/completions/_cargo; rustup completions zsh cargo > $XDG_CACHE_HOME/zsh/completions/_cargo`
+    # * kubectl: TBD
+    # * terraform: TBD
+    # * ng: TBD
 
     autoload -Uz compinit
     compinit -d "$ZCOMPDUMP_FILE"
@@ -164,6 +179,12 @@ function __precmd_add_newline() {
 }
 add-zsh-hook precmd __precmd_add_newline
 
+function chpwd() {
+  if [[ $(pwd) != $HOME ]]; then;
+		ls
+	fi
+}
+
 # Go
 export GOPATH=$HOME/workspace # default: $HOME/go
 # export GOPATH="$XDG_DATA_HOME"/go
@@ -188,6 +209,9 @@ function install_go_sdk() {
   fi
   eval "go install golang.org/dl/go$go_version@latest && go$go_version download && go$go_version version"
 }
+
+# direnv
+# eval "$(direnv hook zsh)"
 
 # GHQ
 export GHQ_ROOT=$HOME/workspace/src
@@ -218,6 +242,19 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_select_history
   bindkey '^R' fzf_select_history
 
+  # function fzf_select_gcloud_config() {
+  #   local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" --height 50% --layout=reverse --info=inline | awk '{print $1}')
+  #   if [ -n "${confname}" ]; then
+  #     BUFFER="gcloud config configurations activate ${confname}"
+  #     zle accept-line
+  #   else
+  #     BUFFER="${LBUFFER}"
+  #   fi
+  #   zle redisplay
+  # }
+  # zle -N fzf_select_gcloud_config
+  # bindkey '^V' fzf_select_gcloud_config
+
   function fzf_cd_ghq_list() {
     local selected_dir=$(ghq list | fzf --prompt "cd " --height 50% --layout=reverse --info=inline --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
@@ -243,5 +280,17 @@ if command -v fzf &> /dev/null; then
   bindkey '^s' fzf_git_log
 
 fi
+
+# 設定した覚えは無いが、既に有効そうな奴ら
+# export PATH=$PATH:/usr/local/bin
+# export PATH=$PATH:/usr/bin
+# zsh-completionsによる補完
+# if [ -e $(brew --prefix)/share/zsh-completions ]; then
+#     FPATH="$(brew --prefix)/share/zsh-completions:${FPATH}"
+# fi
+# brewでインストールしたツールの補完(多分)
+# if type brew &>/dev/null; then
+#   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+# fi
 
 # for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo
