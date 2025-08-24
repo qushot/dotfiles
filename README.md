@@ -21,9 +21,7 @@
 
 ## 動作確認用 Ubuntu コンテナ
 ```sh
-# 以下では sudo が使えないため、完全な動作確認はできない。
-$ docker run -it --user ubuntu --volume $PWD:/home/ubuntu/$(basename "$PWD"):ro --workdir /home/ubuntu/$(basename "$PWD") --rm ubuntu /bin/bash
-# 動作確認を行うためには、 Dockerfile を別途作成する必要がある。
+$ docker build . -t dotfiles && docker run -it --user ubuntu --volume $PWD:/home/ubuntu/$(basename "$PWD"):ro --workdir /home/ubuntu/$(basename "$PWD") --rm dotfiles:latest /bin/bash install.sh
 ```
 
 ## Visual Studio Code
