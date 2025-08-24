@@ -217,7 +217,7 @@ function install_go_sdk() {
 export GHQ_ROOT=$HOME/workspace/src
 # GHQ_ROOTのディレクトリが無ければ作成
 if [[ ! -d ${GHQ_ROOT} ]];then
-  mkdir ${GHQ_ROOT}
+  mkdir -p ${GHQ_ROOT}
 fi
 
 # fzf (ref: https://junegunn.github.io/fzf/reference/)
