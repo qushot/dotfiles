@@ -1,16 +1,12 @@
 #!/bin/bash
-set -euxo pipefail
+set -euo pipefail
 
-echo "今は使えません！！"
-exit 1
+# TODO: curl でリポジトリをダウンロードする
+# TODO: ダウンロードしたリポジトリに移動する
 
 # Set up the ZDOTDIR environment variable
 echo "Setting up ZDOTDIR..."
 echo export ZDOTDIR=\"\$HOME\"/.config/zsh | sudo tee -a /etc/zshenv
-
-# Install Homebrew
-echo "Installing Homebrew..."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # XDG Base Directory specification 関連のディレクトリ作成
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -25,14 +21,25 @@ mkdir -p \
     "$XDG_STATE_HOME"
 
 # .config 配下のディレクトリをリンク
-# TODO: dotfiles のディレクトリに移動する必要がありそう
 ln -sfv $(pwd)/config/* ${XDG_CONFIG_HOME}
 # 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
 # for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
-# zsh 関連のものをインストールする
-# TODO: -> 普通に brew bundle でインストールしても良い気がした
-brew bundle --global --file=.Brewfile
+# Install Homebrew
+echo "Installing Homebrew..."
+NONINTERACTIVE=1 \
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+case "$OSTYPE" in
+  darwin*)
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    ;;
+  linux*)
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    ;;
+esac
+
+brew bundle --global --quiet || true # エラーを無視
 # brew bundle --file=formula.Brewfile
 # brew bundle --file=vscode.Brewfile
 
@@ -40,8 +47,7 @@ brew bundle --global --file=.Brewfile
 command -v zsh | sudo tee -a /etc/shells
 
 # zsh をデフォルトシェルに変更
-# sudo chsh -s "$(command -v zsh)" # たぶん sudo しなくても良い
-chsh -s "$(command -v zsh)"
+chsh -s "$(command -v zsh)" # たぶん sudo しなくても良い
 
 # macOS の場合は defaults_write.sh を実行する
 # WARN: 動作未確認
