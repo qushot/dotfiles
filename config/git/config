@@ -2,7 +2,6 @@
 	name = qushot
 	email = 28912882+qushot@users.noreply.github.com
 [alias]
-	co = checkout
 	cm = commit
 	cma = commit -a
 	cmm = commit -m
@@ -13,7 +12,8 @@
 	rai = !git rebase --autosquash -i $(git log --oneline -n 45 | fzf | awk '{print $1}')
 	st = status
 	a = add
-	cob = checkout -b
+	# co = checkout
+	# cob = checkout -b
 	# cop = !git checkout $(git branch | peco)
 	s = switch
 	sc = switch -c
