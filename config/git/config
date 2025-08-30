@@ -8,9 +8,9 @@
 	cmm = commit -m
 	empty = commit --allow-empty -m 'empty commit'
 	# 対象のコミットを選択して使う
-	fix = commit --fixup
+	fix = !git commit --fixup $(git log --oneline -n 45 | fzf | awk '{print $1}')
 	# 対象の一つ前のコミットを選択して使う
-	rai = rebase --autosquash -i
+	rai = !git rebase --autosquash -i $(git log --oneline -n 45 | fzf | awk '{print $1}')
 	st = status
 	a = add
 	cob = checkout -b
