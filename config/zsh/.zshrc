@@ -230,7 +230,7 @@ if command -v fzf &> /dev/null; then
     { which gtac &> /dev/null && tac="gtac" } || \
       { which tac &> /dev/null && tac="tac" } || \
       tac="tail -r"
-    local selected_command=$(fc -l -n 1 | eval $tac | fzf --query "${LBUFFER}" --height 50% --layout=reverse --info=inline)
+    local selected_command=$(fc -l -n 1 | eval $tac | fzf --query "${LBUFFER}")
     if [ -n "${selected_command}" ]; then
       BUFFER="${selected_command}"
       CURSOR=$(($CURSOR + ${#selected_command}))
@@ -243,7 +243,7 @@ if command -v fzf &> /dev/null; then
   bindkey '^R' fzf_select_history
 
   # function fzf_select_gcloud_config() {
-  #   local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" --height 50% --layout=reverse --info=inline | awk '{print $1}')
+  #   local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" | awk '{print $1}')
   #   if [ -n "${confname}" ]; then
   #     BUFFER="gcloud config configurations activate ${confname}"
   #     zle accept-line
@@ -256,7 +256,7 @@ if command -v fzf &> /dev/null; then
   # bindkey '^V' fzf_select_gcloud_config
 
   function fzf_cd_ghq_list() {
-    local selected_dir=$(ghq list | fzf --prompt "cd " --height 50% --layout=reverse --info=inline --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
+    local selected_dir=$(ghq list | fzf --prompt "cd " --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
       BUFFER="cd $(ghq root)/${selected_dir}"
       zle accept-line
@@ -267,7 +267,7 @@ if command -v fzf &> /dev/null; then
   bindkey '^]' fzf_cd_ghq_list
 
   function fzf_git_log() {
-    local selected_commit=$(git log --oneline -n 45 | fzf --height 50% --layout=reverse --info=inline | awk '{print $1}')
+    local selected_commit=$(git log --oneline -n 45 | fzf | awk '{print $1}')
     if [ -n "$selected_commit" ]; then
       # バッファの現在のカーソル位置にコミットハッシュを挿入
       BUFFER="${BUFFER:0:$CURSOR}${selected_commit}${BUFFER:$CURSOR}"

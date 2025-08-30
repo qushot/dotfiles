@@ -22,6 +22,9 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export PATH="$HOME/bin:$PATH"
 export DOCKER_HOST=unix://"$XDG_RUNTIME_DIR"/docker.sock
 
+# fzf
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --info=inline"
+
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
