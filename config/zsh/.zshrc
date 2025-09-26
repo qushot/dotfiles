@@ -15,7 +15,16 @@ autoload -Uz add-zsh-hook
 
 eval "$(sheldon source)"
 
+### 参考 ###
+# https://github.com/sorin-ionescu/prezto/tree/master/modules
+# https://github.com/sorin-ionescu/prezto/tree/master/modules/utility
+
 alias g='git'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ls='ls -F --color=auto'
+alias tree='tree -C -I ".DS_Store|.idea|.git|node_modules|target" -N'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 # alias kctx="kubectx"
 # alias kns="kubens"
