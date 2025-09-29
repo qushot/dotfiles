@@ -14,6 +14,9 @@ export ZCOMPDUMP_FILE="$ZCOMPDUMP_DIR/zcompdump-$ZSH_VERSION"
 # History settings
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 
+# User binaries
+export PATH="$HOME/bin:$PATH"
+
 # Homebrew
 export HOMEBREW_BUNDLE_FILE_GLOBAL="$XDG_CONFIG_HOME"/homebrew/Brewfile
 
