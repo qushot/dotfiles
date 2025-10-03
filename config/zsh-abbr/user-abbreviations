@@ -2,6 +2,15 @@ abbr e='exec $SHELL -l'
 abbr mkdir='mkdir -p'
 abbr bbd='brew bundle dump --global --force --describe'
 
+# Terraform
+abbr t='terraform'
+abbr ti='terraform init'
+abbr tp='terraform plan'
+abbr tw='terraform workspace'
+abbr twl='terraform workspace list'
+abbr tws='terraform workspace select'
+abbr twsh='terraform workspace show'
+
 # git
 abbr 'gcm'='git commit'
 abbr 'gcma'='git commit -a'

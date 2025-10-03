@@ -122,6 +122,7 @@ if command -v brew &>/dev/null; then
     # * docker: `rm -f $XDG_CACHE_HOME/zsh/completions/_docker; docker completion zsh > $XDG_CACHE_HOME/zsh/completions/_docker`
     # * rustup: `rm -f $XDG_CACHE_HOME/zsh/completions/_rustup; rustup completions zsh > $XDG_CACHE_HOME/zsh/completions/_rustup`
     # * cargo: `rm -f $XDG_CACHE_HOME/zsh/completions/_cargo; rustup completions zsh cargo > $XDG_CACHE_HOME/zsh/completions/_cargo`
+    # * tenv: `rm -f $XDG_CACHE_HOME/zsh/completions/_tenv; tenv completion zsh > $XDG_CACHE_HOME/zsh/completions/_tenv`
     # * kubectl: TBD
     # * terraform: TBD
     # * ng: TBD
@@ -227,6 +228,11 @@ export GHQ_ROOT=$HOME/workspace/src
 # GHQ_ROOTのディレクトリが無ければ作成
 if [[ ! -d ${GHQ_ROOT} ]];then
   mkdir -p ${GHQ_ROOT}
+fi
+
+# Terraform
+if command -v terraform &> /dev/null; then
+  complete -C "$(which terraform)" terraform
 fi
 
 # fzf (ref: https://junegunn.github.io/fzf/reference/)
