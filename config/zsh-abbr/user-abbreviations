@@ -1,6 +1,8 @@
 abbr e='exec $SHELL -l'
 abbr mkdir='mkdir -p'
 abbr bbd='brew bundle dump --global --force --describe'
+abbr t='terraform'
+abbr tp='terraform plan'
 
 # git
 abbr 'gcm'='git commit'
