@@ -208,16 +208,20 @@ export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わな
 # unfunction __go_packages # NG
 
 function install_go_sdk() {
-  # ref: https://go.dev/doc/manage-install
-  local go_version="$1"
+  # references
+  # * https://go.dev/doc/manage-install
+  # * https://pkg.go.dev/golang.org/x/website/internal/dl
+  local go_version=$(
+    curl -sSL 'https://go.dev/dl/?mode=json&include=all' |\
+    jq -r '.[] | select(.stable == true) | .version' |\
+    fzf --prompt "Go version "
+  )
   if [[ -z "$go_version" ]]; then
-    echo "Usage: install_go_sdk <version>"
-    return 1
-  elif [[ ! "$go_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    echo "Invalid version format. (e.g., 1.23.4)."
+    echo "No Go version selected."
     return 1
   fi
-  eval "go install golang.org/dl/go$go_version@latest && go$go_version download && go$go_version version"
+  echo "Installing Go SDK version $go_version..."
+  eval "go install golang.org/dl/$go_version@latest && $go_version download && $go_version version"
 }
 
 # direnv
