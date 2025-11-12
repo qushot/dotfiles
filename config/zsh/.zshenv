@@ -22,8 +22,17 @@ export HOMEBREW_BUNDLE_FILE_GLOBAL="$XDG_CONFIG_HOME"/homebrew/Brewfile
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export PATH="$HOME/bin:$PATH"
-export DOCKER_HOST=unix://"$XDG_RUNTIME_DIR"/docker.sock
+case "$OSTYPE" in
+  darwin*)
+    ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+    export DOCKER_HOST=unix://${HOME}/.rd/docker.sock
+    export PATH="${HOME}/.rd/bin:$PATH"
+    ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+    ;;
+  linux*)
+    export DOCKER_HOST=unix://"$XDG_RUNTIME_DIR"/docker.sock
+    ;;
+esac
 
 # fzf
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --info=inline"
