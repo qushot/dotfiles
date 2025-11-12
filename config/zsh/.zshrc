@@ -225,7 +225,9 @@ function install_go_sdk() {
 }
 
 # direnv
-# eval "$(direnv hook zsh)"
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # GHQ
 export GHQ_ROOT=$HOME/workspace/src
