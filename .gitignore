@@ -1,2 +1,5 @@
 .DS_Store
 **/.zprezto/**
+
+config/docker/**
+# !config/docker/config.json
