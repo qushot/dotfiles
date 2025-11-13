@@ -3,15 +3,16 @@ abbr mkdir='mkdir -p'
 abbr bbd='brew bundle dump --global --force --describe'
 
 # Terraform
-abbr t='terraform'
-abbr ti='terraform init'
-abbr tp='terraform plan'
-abbr tw='terraform workspace'
-abbr twl='terraform workspace list'
-abbr tws='terraform workspace select'
-abbr twsh='terraform workspace show'
+abbr 't'='terraform'
+abbr 'ti'='terraform init'
+abbr 'tp'='terraform plan'
+abbr 'tw'='terraform workspace'
+abbr 'twl'='terraform workspace list'
+abbr 'tws'='terraform workspace select'
+abbr 'twsh'='terraform workspace show'
 
 # git
+abbr 'g'='git'
 abbr 'gcm'='git commit'
 abbr 'gcma'='git commit -a'
 abbr 'gcmm'='git commit -m'
@@ -30,3 +31,18 @@ abbr 'grai'='git rebase --autosquash -i $(git log --oneline -n 45 | fzf | awk '\
 abbr 'empty'='git commit --allow-empty -m "empty commit"'
 abbr 'test-add-commit-push'='git add -A && git commit -m "test commit $(date '\''+%Y-%m-%d %H:%M:%S'\'')" && git push origin $(git rev-parse --abbrev-ref HEAD)'
 abbr 'delete-merged-branches'='git branch --merged | grep -vE '\''^\\*|main$|master$|develop$'\'' | xargs -p -I % git branch -d %'
+
+# Docker
+abbr 'd'='docker'
+abbr 'docker c'='docker compose'
+
+# Docker Compose
+abbr 'dc'='docker compose'
+abbr 'dcu'='docker compose up -d'
+abbr 'dcd'='docker compose down'
+abbr 'dcb'='docker compose build --no-cache'
+abbr 'dcl'='docker compose logs -f'
+abbr 'docker compose u'='docker compose up -d'
+abbr 'docker compose d'='docker compose down'
+abbr 'docker compose b'='docker compose build --no-cache'
+abbr 'docker compose l'='docker compose logs -f'
