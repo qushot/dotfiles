@@ -13,6 +13,7 @@ abbr 'twsh'='terraform workspace show'
 
 # git
 abbr 'g'='git'
+
 abbr 'gcm'='git commit'
 abbr 'gcma'='git commit -a'
 abbr 'gcmm'='git commit -m'
@@ -24,6 +25,19 @@ abbr 'gdc'='git diff --cached'
 abbr 'ggr'='git grep -i -n'
 abbr 'gb'='git branch'
 abbr 'gba'='git branch -a'
+
+abbr 'git cm'='git commit'
+abbr 'git cma'='git commit -a'
+abbr 'git cmm'='git commit -m'
+abbr 'git st'='git status'
+abbr 'git a'='git add'
+abbr 'git s'='git switch'
+abbr 'git sc'='git switch -c'
+abbr 'git dc'='git diff --cached'
+abbr 'git gr'='git grep -i -n'
+abbr 'git b'='git branch'
+abbr 'git ba'='git branch -a'
+
 abbr 'gla'='git log -n 45 --oneline'
 abbr 'gpuo'='git push -u origin'
 abbr 'gfix'='git commit --fixup $(git log --oneline -n 45 | fzf | awk '\''{print $1}'\'')'
@@ -38,10 +52,12 @@ abbr 'docker c'='docker compose'
 
 # Docker Compose
 abbr 'dc'='docker compose'
+
 abbr 'dcu'='docker compose up -d'
 abbr 'dcd'='docker compose down'
 abbr 'dcb'='docker compose build --no-cache'
 abbr 'dcl'='docker compose logs -f'
+
 abbr 'docker compose u'='docker compose up -d'
 abbr 'docker compose d'='docker compose down'
 abbr 'docker compose b'='docker compose build --no-cache'
