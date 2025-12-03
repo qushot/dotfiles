@@ -269,18 +269,38 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_select_history
   bindkey '^R' fzf_select_history
 
-  # function fzf_select_gcloud_config() {
-  #   local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" | awk '{print $1}')
-  #   if [ -n "${confname}" ]; then
-  #     BUFFER="gcloud config configurations activate ${confname}"
-  #     zle accept-line
-  #   else
-  #     BUFFER="${LBUFFER}"
-  #   fi
-  #   zle redisplay
-  # }
-  # zle -N fzf_select_gcloud_config
-  # bindkey '^V' fzf_select_gcloud_config
+  function fzf_select_gcloud_config() {
+    local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" | awk '{print $1}')
+    if [ -n "${confname}" ]; then
+      BUFFER="gcloud config configurations activate ${confname}"
+      zle accept-line
+    else
+      BUFFER="${LBUFFER}"
+    fi
+    zle redisplay
+  }
+  zle -N fzf_select_gcloud_config
+  bindkey '^V' fzf_select_gcloud_config
+
+  function fzf_open_google_cloud_dashboard() {
+    # ~/.project_list が無ければ作成する
+    if [ ! -f ~/.project_list.txt ]; then
+      echo "Creating ~/.project_list.txt file..."
+      touch ~/.project_list.txt
+    fi
+
+    # ~/.project_list.txt の空白行やコメント行を除外してから fzf に渡す
+    local project_id=$(grep -vE '^\s*($|#)' ~/.project_list.txt | fzf --query "${LBUFFER}")
+    if [ -n "${project_id}" ]; then
+      BUFFER="open \"https://console.cloud.google.com/home/dashboard?project=${project_id}\""
+      zle accept-line
+    else
+      BUFFER="${LBUFFER}"
+    fi
+    zle redisplay
+  }
+  zle -N fzf_open_google_cloud_dashboard
+  bindkey '^o' fzf_open_google_cloud_dashboard
 
   function fzf_cd_ghq_list() {
     local selected_dir=$(ghq list | fzf --prompt "cd " --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
