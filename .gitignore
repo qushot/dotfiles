@@ -3,3 +3,4 @@
 
 config/docker/**
 # !config/docker/config.json
+com.googlecode.iterm2.plist
