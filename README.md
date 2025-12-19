@@ -3,12 +3,14 @@
 ## Install
 
 ```
-curl -LSfs https://raw.githubusercontent.com/qushot/dotfiles/master/install.sh | zsh
+curl -LSfs https://raw.githubusercontent.com/qushot/dotfiles/main/install.sh | bash
 ```
 
 ## Change connection protocol from https to ssh
 
 ```
+gh auth login
+
 git remote set-url origin git@github.com:qushot/dotfiles.git
 
 # Check

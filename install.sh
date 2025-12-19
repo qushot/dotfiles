@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# TODO: curl でリポジトリをダウンロードする
-# TODO: ダウンロードしたリポジトリに移動する
+DOTFILES_DIR="$HOME/.dotfiles"
+
+git clone https://github.com/qushot/dotfiles.git "$DOTFILES_DIR"
+cd "$DOTFILES_DIR"
 
 # Set up the ZDOTDIR environment variable
 echo "Setting up ZDOTDIR..."
@@ -36,6 +38,7 @@ case "$OSTYPE" in
     ;;
   linux*)
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    sudo apt-get update -y && sudo apt-get install build-essential -y
     ;;
 esac
 
@@ -47,7 +50,7 @@ brew bundle --global --quiet || true # エラーを無視
 command -v zsh | sudo tee -a /etc/shells
 
 # zsh をデフォルトシェルに変更
-chsh -s "$(command -v zsh)" # たぶん sudo しなくても良い
+sudo chsh -s "$(command -v zsh)" "$USER"
 
 # macOS の場合は defaults_write.sh を実行する
 # WARN: 動作未確認
@@ -58,4 +61,13 @@ case "$OSTYPE" in
 esac
 
 # 再起動
-# sudo shutdown -r now
+case "$OSTYPE" in
+  darwin*)
+    echo "Please restart your Mac to apply all changes."
+    ;;
+  linux*)
+    echo "Rebooting the system..."
+    sudo shutdown -r now
+    ;;
+esac
+
