@@ -95,6 +95,22 @@ done
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
+# zsh-abbr
+# * https://zsh-abbr.olets.dev/integrations.html#zsh-syntax-highlighting
+(( ${#ABBR_REGULAR_USER_ABBREVIATIONS} )) && {
+  typeset -A ZSH_HIGHLIGHT_REGEXP
+  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(regexp)
+  ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(Qk)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=magenta,bold)
+  case "$OSTYPE" in
+    darwin*)
+      ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow,bold)
+      ;;
+    linux*)
+      ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow,bold)
+      ;;
+  esac
+}
+
 if command -v brew &>/dev/null; then
     # zsh-completions
     # NOTE: You may also need to force rebuild `zcompdump`: rm -f "$ZCOMPDUMP_FILE"; compinit -d "$ZCOMPDUMP_FILE"
