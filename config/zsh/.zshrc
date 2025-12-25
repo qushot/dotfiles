@@ -247,6 +247,12 @@ if command -v terraform &> /dev/null; then
   complete -C "$(which terraform)" terraform
 fi
 
+# zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
 # fzf (ref: https://junegunn.github.io/fzf/reference/)
 if command -v fzf &> /dev/null; then
   # Set up fzf key bindings and fuzzy completion
