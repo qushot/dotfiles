@@ -20,6 +20,8 @@ brew "glow"
 brew "gron"
 # Like cURL, but for gRPC
 brew "grpcurl"
+# Command-line pager for JSON data
+brew "jless"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Simple terminal UI for git commands

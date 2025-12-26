@@ -4,6 +4,9 @@ abbr bbd='brew bundle dump --global --force --describe'
 
 abbr 'fdf'='fd -t f | fzf --preview '\''bat --color=always --style=numbers {}'\'''
 
+# jless
+abbr 'yless'='jless --yaml'
+
 # Terraform
 abbr 't'='terraform'
 abbr 'ti'='terraform init'
