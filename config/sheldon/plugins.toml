@@ -37,6 +37,9 @@ github = "olets/zsh-abbr"
 [plugins.zsh-autopair]
 github = "hlissner/zsh-autopair"
 
+[plugins.dircycle]
+github = "michaelxmcbride/zsh-dircycle"
+
 # For example:
 #
 # [plugins.base16]
