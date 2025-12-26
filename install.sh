@@ -23,7 +23,7 @@ mkdir -p \
     "$XDG_STATE_HOME"
 
 # .config 配下のディレクトリをリンク
-ln -sfv $(pwd)/config/* ${XDG_CONFIG_HOME}
+ln -sfv ${DOTFILES_DIR}/config/* ${XDG_CONFIG_HOME}
 # 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
 # for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
