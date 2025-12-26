@@ -14,6 +14,7 @@ setopt PROMPT_SUBST # プロンプトで変数を展開する
 autoload -Uz add-zsh-hook
 
 eval "$(sheldon source)"
+eval "$(mise activate zsh)"
 
 ### 参考 ###
 # https://github.com/sorin-ionescu/prezto/tree/master/modules
