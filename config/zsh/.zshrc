@@ -13,8 +13,20 @@ setopt PROMPT_SUBST # プロンプトで変数を展開する
 
 autoload -Uz add-zsh-hook
 
-eval "$(sheldon source)"
-eval "$(mise activate zsh)"
+# sheldon
+if command -v sheldon &> /dev/null; then
+  eval "$(sheldon source)"
+fi
+
+# mise
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+# direnv
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 ### 参考 ###
 # https://github.com/sorin-ionescu/prezto/tree/master/modules
@@ -246,11 +258,6 @@ function install_go_sdk() {
   echo "Installing Go SDK version $go_version..."
   eval "go install golang.org/dl/$go_version@latest && $go_version download && $go_version version"
 }
-
-# direnv
-if command -v direnv &> /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
 
 # GHQ
 export GHQ_ROOT=$HOME/workspace/src
