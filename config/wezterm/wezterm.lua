@@ -3,6 +3,8 @@ local scheme = wezterm.color.get_builtin_schemes()["Ubuntu"]
 
 local config = wezterm.config_builder()
 
+-- wezterm.target_triple: https://wezterm.org/config/lua/wezterm/target_triple.html
+
 local background_opacity = 0.85
 config.automatically_reload_config = true -- default is true since version 20201031-154415-9614e117
 config.use_ime = true -- default is true since version 20220319-142410-0fcdea07
@@ -14,7 +16,12 @@ config.window_background_opacity = background_opacity
 config.macos_window_background_blur = 20
 -- config.win32_system_backdrop = 'Acrylic'
 config.font = wezterm.font('HackGen Console NF')
-config.font_size = 12.0
+
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+  config.font_size = 12.0 -- Windows
+elseif wezterm.target_triple == "aarch64-apple-darwin" or wezterm.target_triple == "x86_64-apple-darwin" then
+  config.font_size = 14.0 -- MacOS
+end
 
 config.enable_scroll_bar = true
 config.default_cursor_style = 'BlinkingUnderline'
@@ -39,13 +46,12 @@ config.colors = {
 
 ------------------
 -- Default Shell
----- Windows
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+  -- Windows
   config.default_prog = { "wsl.exe", "--distribution-id", "{ca735016-15db-4e93-a771-7688aad8ec92}", "--cd", "~" }
   -- config.default_prog = { "wsl.exe", "--distribution-id", "{564ad482-51b6-4cb9-9aa8-ccadb93a9c1f}", "--cd", "~" } -- dotfiles
-end
----- MacOS
-if wezterm.target_triple == "x86_64-apple-darwin" then
+elseif wezterm.target_triple == "aarch64-apple-darwin" or wezterm.target_triple == "x86_64-apple-darwin" then
+  -- MacOS
   config.default_prog = { "/opt/homebrew/bin/zsh", "-l" }
 end
 
