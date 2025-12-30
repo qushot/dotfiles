@@ -13,9 +13,12 @@ config.initial_cols = 180
 config.initial_rows = 50
 config.color_scheme = "Ubuntu"
 config.window_background_opacity = background_opacity
-config.macos_window_background_blur = 20
+config.macos_window_background_blur = 10
 -- config.win32_system_backdrop = 'Acrylic'
-config.font = wezterm.font('HackGen Console NF')
+config.font = wezterm.font {
+  family = 'HackGen Console NF',
+  weight = 'Bold',
+}
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.font_size = 12.0 -- Windows
@@ -29,6 +32,9 @@ config.default_cursor_style = 'BlinkingUnderline'
 ------------------
 -- Tab
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.integrated_title_button_style = "Gnome"
+config.integrated_title_button_alignment = "Right"
+
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.text_background_opacity = background_opacity
