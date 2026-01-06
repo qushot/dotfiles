@@ -8,13 +8,21 @@ abbr 'fdf'='fd -t f | fzf --preview '\''bat --color=always --style=numbers {}'\'
 abbr 'yless'='jless --yaml'
 
 # Terraform
-abbr 't'='terraform'
-abbr 'ti'='terraform init'
-abbr 'tp'='terraform plan'
-abbr 'tw'='terraform workspace'
-abbr 'twl'='terraform workspace list'
-abbr 'tws'='terraform workspace select'
-abbr 'twsh'='terraform workspace show'
+abbr 'tf'='terraform'
+
+abbr 'tfi'='terraform init'
+abbr 'tfp'='terraform plan'
+abbr 'tfw'='terraform workspace'
+abbr 'tfwl'='terraform workspace list'
+abbr 'tfws'='terraform workspace select'
+abbr 'tfwsh'='terraform workspace show'
+
+abbr 'terraform i'='terraform init'
+abbr 'terraform p'='terraform plan'
+abbr 'terraform w'='terraform workspace'
+abbr 'terraform wl'='terraform workspace list'
+abbr 'terraform ws'='terraform workspace select'
+abbr 'terraform wsh'='terraform workspace show'
 
 # git
 abbr 'g'='git'
