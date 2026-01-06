@@ -24,6 +24,13 @@ abbr 'terraform wl'='terraform workspace list'
 abbr 'terraform ws'='terraform workspace select'
 abbr 'terraform wsh'='terraform workspace show'
 
+# tmux
+abbr 't'='tmux'
+
+abbr 'ts'='tmux new -s'
+
+abbr 'tmux s'='tmux new -s'
+
 # git
 abbr 'g'='git'
 
