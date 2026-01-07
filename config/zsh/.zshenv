@@ -35,7 +35,20 @@ case "$OSTYPE" in
 esac
 
 # fzf
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --info=inline"
+export FZF_DEFAULT_OPTS="--height 50% --tmux 90%,70% --layout=reverse --info=inline"
+# Disable fzf's default key bindings
+export FZF_CTRL_T_COMMAND=
+export FZF_CTRL_R_COMMAND=
+export FZF_ALT_C_COMMAND=
+# # Preview file content using bat (https://github.com/sharkdp/bat)
+# export FZF_CTRL_T_OPTS="
+#     --walker-skip .git,node_modules,target
+#     --preview 'bat -n --color=always {}'
+#     --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# # Print tree structure in the preview window
+# export FZF_ALT_C_OPTS="
+#     --walker-skip .git,node_modules,target
+#     --preview 'tree -C {}'"
 
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
