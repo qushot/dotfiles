@@ -160,6 +160,11 @@ if command -v brew &>/dev/null; then
     compinit -d "$ZCOMPDUMP_FILE"
 fi
 
+# tbls
+if command -v tbls &> /dev/null; then
+  eval "$(tbls completion zsh)"
+fi
+
 # Git
 # NOTE
 # * update: `rm -f ~/.zsh/scripts/git-prompt.sh; curl -o ~/.zsh/scripts/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh`
