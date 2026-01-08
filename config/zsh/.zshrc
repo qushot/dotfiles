@@ -303,6 +303,19 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_git_log
   bindkey '^s' fzf_git_log
 
+  fzf-tmux-attach-session() {
+    local session=$(tmux list-sessions -F '#S' | fzf --prompt "Attach to tmux session: ")
+    if [ -n "$session" ]; then
+      tmux attach-session -t "$session"
+    fi
+  }
+
+  fzf-tmux-kill-session() {
+    local session=$(tmux list-sessions -F '#S' | fzf --prompt "Kill tmux session: ")
+    if [ -n "$session" ]; then
+      tmux kill-session -t "$session"
+    fi
+  }
 fi
 
 # starship
