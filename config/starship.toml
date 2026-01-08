@@ -1,0 +1,4 @@
+[character]
+# FIXME: 三項演算子で特権ユーザと一般ユーザで記号を変えたい `%(!,#,$)` starship で可能なら対応したい
+success_symbol = "[\\(^-^\\)](green) [\\$](bold green)"
+error_symbol = "[\\(;o;\\)](red) [\\$](bold red)"

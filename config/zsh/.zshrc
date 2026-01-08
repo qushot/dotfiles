@@ -165,47 +165,6 @@ if command -v tbls &> /dev/null; then
   eval "$(tbls completion zsh)"
 fi
 
-# Git
-# NOTE
-# * update: `rm -f ~/.zsh/scripts/git-prompt.sh; curl -o ~/.zsh/scripts/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh`
-if [[ -f ~/.zsh/scripts/git-prompt.sh ]]; then
-    source ~/.zsh/scripts/git-prompt.sh
-
-    # Enable optional git-prompt features
-    # NOTE: You may need to set the following variables in your ~/.zshenv
-    GIT_PS1_SHOWDIRTYSTATE=true
-    GIT_PS1_SHOWSTASHSTATE=true
-    GIT_PS1_SHOWUNTRACKEDFILES=true
-    GIT_PS1_SHOWUPSTREAM="auto"
-    GIT_PS1_STATESEPARATOR="%F{green}:%f"
-    GIT_PS1_SHOWCOLORHINTS=true
-    GIT_PS1_SHOWCONFLICTSTATE=true
-    GIT_PS1_DESCRIBE_STYLE="branch"
-fi
-
-function __precmd_prompt() {
-    local prompt_base="%B%F{063}[%~]%f%b"
-    # local prompt_symbol="%(?,%F{green},%F{red})%(!,#,>)%f"
-    local prompt_symbol="%(?,%F{green}(^-^,%F{red}(;o;)) %B%(!,#,$)%b%f"
-
-    local prompt_git=""
-    if [[ -f ~/.zsh/scripts/git-prompt.sh ]]; then
-        prompt_git=" $(__git_ps1 "%s")"
-    fi
-
-    PS1="${prompt_base}${prompt_git}"$'\n'"${prompt_symbol} "
-}
-add-zsh-hook precmd __precmd_prompt
-
-function __precmd_add_newline() {
-  if [[ -z $PS1_NEWLINE_LOGIN ]]; then
-    PS1_NEWLINE_LOGIN=true
-  else
-    printf '\n'
-  fi
-}
-add-zsh-hook precmd __precmd_add_newline
-
 function chpwd() {
   if [[ $(pwd) != $HOME ]]; then;
 		ls
@@ -344,6 +303,11 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_git_log
   bindkey '^s' fzf_git_log
 
+fi
+
+# starship
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
 fi
 
 # 設定した覚えは無いが、既に有効そうな奴ら
