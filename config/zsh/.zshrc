@@ -189,7 +189,7 @@ export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わな
 # unset -f __go_packages >/dev/null 2>&1 # NG
 # unfunction __go_packages # NG
 
-function install_go_sdk() {
+install-go-sdk() {
   # references
   # * https://go.dev/doc/manage-install
   # * https://pkg.go.dev/golang.org/x/website/internal/dl
