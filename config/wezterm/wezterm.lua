@@ -50,6 +50,13 @@ config.colors = {
   }
 }
 
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
+
 ------------------
 -- Default Shell
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
