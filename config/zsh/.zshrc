@@ -229,7 +229,7 @@ if command -v fzf &> /dev/null; then
   # Set up fzf key bindings and fuzzy completion
   source <(fzf --zsh)
 
-  function fzf_select_history() {
+  fzf_select_history() {
     local tac
     { which gtac &> /dev/null && tac="gtac" } || \
       { which tac &> /dev/null && tac="tac" } || \
@@ -246,7 +246,7 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_select_history
   bindkey '^R' fzf_select_history
 
-  function fzf_select_gcloud_config() {
+  fzf_select_gcloud_config() {
     local confname=$(gcloud config configurations list | tail -n +2 | fzf --query "${LBUFFER}" | awk '{print $1}')
     if [ -n "${confname}" ]; then
       BUFFER="gcloud config configurations activate ${confname}"
@@ -259,7 +259,7 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_select_gcloud_config
   bindkey '^V' fzf_select_gcloud_config
 
-  function fzf_open_google_cloud_dashboard() {
+  fzf_open_google_cloud_dashboard() {
     # ~/.project_list が無ければ作成する
     if [ ! -f ~/.project_list.txt ]; then
       echo "Creating ~/.project_list.txt file..."
@@ -279,7 +279,7 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_open_google_cloud_dashboard
   bindkey '^o' fzf_open_google_cloud_dashboard
 
-  function fzf_cd_ghq_list() {
+  fzf_cd_ghq_list() {
     local selected_dir=$(ghq list | fzf --prompt "cd " --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
       BUFFER="cd $(ghq root)/${selected_dir}"
@@ -290,7 +290,7 @@ if command -v fzf &> /dev/null; then
   zle -N fzf_cd_ghq_list
   bindkey '^]' fzf_cd_ghq_list
 
-  function fzf_git_log() {
+  fzf_git_log() {
     local selected_commit=$(git log --oneline -n 45 | fzf | awk '{print $1}')
     if [ -n "$selected_commit" ]; then
       # バッファの現在のカーソル位置にコミットハッシュを挿入
