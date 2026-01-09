@@ -206,6 +206,14 @@ install-go-sdk() {
   eval "go install golang.org/dl/$go_version@latest && $go_version download && $go_version version"
 }
 
+versions() {
+  zsh --version
+  tmux -V
+  git --version
+  docker --version
+  go version
+}
+
 # GHQ
 export GHQ_ROOT=$HOME/workspace/src
 # GHQ_ROOTのディレクトリが無ければ作成
