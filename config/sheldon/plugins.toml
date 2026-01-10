@@ -40,6 +40,12 @@ github = "hlissner/zsh-autopair"
 [plugins.dircycle]
 github = "michaelxmcbride/zsh-dircycle"
 
+# `mise activate zsh` is slow, so I tried caching it with evalcache, but it didn't improve much.
+# [plugins.evalcache]
+# github = "mroth/evalcache"
+# [plugins.evalcache.hooks]
+# pre = "export ZSH_EVALCACHE_DIR=\"${XDG_CACHE_HOME:-$HOME/.cache}/evalcache\""
+
 # For example:
 #
 # [plugins.base16]
