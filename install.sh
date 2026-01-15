@@ -1,6 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check for required commands
+REQUIRED_CMDS=("curl" "git")
+for cmd in "${REQUIRED_CMDS[@]}"; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "$cmd is not installed. Please install $cmd and rerun the script."
+        exit 1
+    fi
+done
+
 DOTFILES_DIR="$HOME/.dotfiles"
 
 git clone https://github.com/qushot/dotfiles.git "$DOTFILES_DIR"
