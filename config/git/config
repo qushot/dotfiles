@@ -43,5 +43,6 @@
 	rebase = false
 [ghq]
 	root = ~/workspace
+	user = qushot
 [init]
 	defaultBranch = main

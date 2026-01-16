@@ -207,13 +207,6 @@ versions() {
   go version
 }
 
-# GHQ
-export GHQ_ROOT=$HOME/workspace/src
-# GHQ_ROOTのディレクトリが無ければ作成
-if [[ ! -d ${GHQ_ROOT} ]];then
-  mkdir -p ${GHQ_ROOT}
-fi
-
 # Terraform
 if command -v terraform &> /dev/null; then
   complete -C "$(which terraform)" terraform
@@ -281,7 +274,7 @@ if command -v fzf &> /dev/null; then
   bindkey '^o' fzf_open_google_cloud_dashboard
 
   fzf_cd_ghq_list() {
-    local selected_dir=$(ghq list | fzf --prompt "cd " --preview 'tree -a -C ${GHQ_ROOT}/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
+    local selected_dir=$(ghq list | fzf --prompt "cd " --preview 'tree -a -C $(ghq root)/{} -I "\.DS_Store|\.idea|\.git|node_modules|target" -N')
     if [ -n "$selected_dir" ]; then
       BUFFER="cd $(ghq root)/${selected_dir}"
       zle accept-line
