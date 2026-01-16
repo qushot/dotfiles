@@ -35,7 +35,11 @@ case "$OSTYPE" in
 esac
 
 # fzf
-export FZF_DEFAULT_OPTS="--height 50% --tmux 90%,70% --layout=reverse --info=inline"
+export FZF_DEFAULT_OPTS="--height 50% --tmux 90%,70% --layout=reverse --info=inline \
+--bind 'ctrl-/:change-preview-window(80%|hidden|)' \
+--bind 'ctrl-u:preview-half-page-up' \
+--bind 'ctrl-d:preview-half-page-down' \
+"
 # Disable fzf's default key bindings
 export FZF_CTRL_T_COMMAND=
 export FZF_CTRL_R_COMMAND=
