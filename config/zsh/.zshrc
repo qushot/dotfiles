@@ -165,6 +165,11 @@ if command -v tbls &> /dev/null; then
   eval "$(tbls completion zsh)"
 fi
 
+# gwq
+if command -v gwq &> /dev/null; then
+  source <(gwq completion zsh)
+fi
+
 function chpwd() {
   if [[ $(pwd) != $HOME ]]; then;
 		ls

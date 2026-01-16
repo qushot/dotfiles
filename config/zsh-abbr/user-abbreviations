@@ -2,6 +2,8 @@ abbr e='exec $SHELL -l'
 abbr mkdir='mkdir -p'
 abbr bbd='brew bundle dump --global --force --describe'
 
+abbr 'cg'='cursor $(gwq get)'
+
 abbr 'fdf'='fd -t f | fzf --preview '\''bat --color=always --style=numbers {}'\'' || :'
 
 # jless
