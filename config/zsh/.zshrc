@@ -178,13 +178,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Go
-export GOPATH=$HOME/workspace # default: $HOME/go
-# export GOPATH="$XDG_DATA_HOME"/go
-export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
-export PATH=$PATH:$GOBIN
-export GOVERSION=1.25.5
-export GOSDK=$HOME/sdk/go$GOVERSION
-export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
 # zsh-completionsで定義されている関数 __go_packages を削除、あるいは無効化したい…
 # unset -f __go_packages >/dev/null 2>&1 # NG
 # unfunction __go_packages # NG

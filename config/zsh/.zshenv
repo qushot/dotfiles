@@ -50,6 +50,15 @@ export FZF_ALT_C_COMMAND=
 #     --walker-skip .git,node_modules,target
 #     --preview 'tree -C {}'"
 
+# Go
+export GOPATH=$HOME/workspace # default: $HOME/go
+# export GOPATH="$XDG_DATA_HOME"/go
+export GOBIN=$HOME/go/bin     # default: $GOPATH/bin
+export PATH=$PATH:$GOBIN
+export GOVERSION=1.25.5
+export GOSDK=$HOME/sdk/go$GOVERSION
+export PATH=$GOSDK/bin:$PATH # homebrewでインストールしたgoは使わないため、PATHの先頭に追加している
+
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
