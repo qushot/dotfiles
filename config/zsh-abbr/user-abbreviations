@@ -30,8 +30,10 @@ abbr 'terraform wsh'='terraform workspace show'
 abbr 't'='tmux'
 
 abbr 'ts'='tmux new -s'
+abbr 'ta'='tmux a -t $(tmux ls -F "#{session_name}" | fzf)'
 
 abbr 'tmux s'='tmux new -s'
+abbr 'tmux a'='tmux a -t $(tmux ls -F "#{session_name}" | fzf)'
 
 # git
 abbr 'g'='git'
