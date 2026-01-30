@@ -36,7 +36,7 @@ esac
 
 # fzf
 export FZF_DEFAULT_OPTS="--height 50% --tmux 90%,70% --layout=reverse --info=inline \
---bind 'ctrl-/:change-preview-window(80%|hidden|)' \
+--bind 'ctrl-/:change-preview-window(80%|)' \
 --bind 'ctrl-u:preview-half-page-up' \
 --bind 'ctrl-d:preview-half-page-down' \
 "
