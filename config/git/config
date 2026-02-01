@@ -37,12 +37,32 @@
 	clean = git-lfs clean -- %f
 [core]
 	autocrlf = input
+	pager = delta
 [commit]
 	template = ~/.stCommitMsg
 [pull]
 	rebase = false
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
+[pager]
+	diff = delta
+	log = delta
+	reflog = delta
+	show = delta
+[interactive]
+	diffFilter = delta --color-only
 [ghq]
 	root = ~/workspace
 	user = qushot
+[delta]
+	width = variable
+	true-color = always
+	navigate = true
+	syntax-theme = github
+	line-numbers = true
+	side-by-side = true
+	wrap = true
 [init]
 	defaultBranch = main
