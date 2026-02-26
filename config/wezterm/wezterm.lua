@@ -1,11 +1,12 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- wezterm.target_triple: https://wezterm.org/config/lua/wezterm/target_triple.html
 
 local background_opacity = 0.85
 local background_blur = 10
-local scheme_name = "Ubuntu" -- , Kanagawa (Gogh), 
+local scheme_name = "Ubuntu" -- , Kanagawa (Gogh),
 config.automatically_reload_config = true -- default is true since version 20201031-154415-9614e117
 config.use_ime = true -- default is true since version 20220319-142410-0fcdea07
 
@@ -58,6 +59,14 @@ config.window_padding = {
   bottom = 0,
 }
 
+wezterm.on('update-right-status', function(window, pane)
+  local name = window:active_key_table()
+  if name then
+    name = 'TABLE: ' .. name
+  end
+  window:set_right_status(name or '')
+end)
+
 ------------------
 -- Keybinds
 config.leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 2000 }
@@ -73,9 +82,43 @@ config.keys = {
       end
     ),
   },
+  {
+    key = 'o',
+    mods = 'LEADER',
+    action = act.ActivateKeyTable {
+      name = 'setting_mode',
+      one_shot = false,
+      timeout_milliseconds = 1000,
+    },
+  },
 }
 config.key_tables = {
-  -- Additional key tables can be defined here
+  setting_mode = {
+    {
+      key = "d",
+      action = wezterm.action_callback(
+        function(window)
+          require("toggle").adjust_opacity(window, -0.05)
+        end
+      ),
+    },
+    {
+      key = "u",
+      action = wezterm.action_callback(
+        function(window)
+          require("toggle").adjust_opacity(window, 0.05)
+        end
+      ),
+    },
+    {
+      key = "r",
+      action = wezterm.action_callback(
+        function(window)
+          require("toggle").reset_opacity(window, background_opacity)
+        end
+      ),
+    },
+  },
 }
 config.mouse_bindings = {
   -- Right click to paste from clipboard
