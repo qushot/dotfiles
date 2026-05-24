@@ -61,6 +61,9 @@ export PATH=$PATH:$GOPATH/bin
 # export GOVERSION=1.25.5
 # export PATH=$HOME/sdk/go$GOVERSION/bin:$PATH
 
+# Haskell
+export PATH=$PATH:$HOME/.ghcup/bin
+
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
