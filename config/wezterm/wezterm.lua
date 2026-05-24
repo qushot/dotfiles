@@ -24,7 +24,7 @@ config.font = wezterm.font {
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.font_size = 12.0 -- Windows
 elseif wezterm.target_triple == "aarch64-apple-darwin" or wezterm.target_triple == "x86_64-apple-darwin" then
-  config.font_size = 14.0 -- MacOS
+  config.font_size = 13.0 -- MacOS
 end
 
 config.enable_scroll_bar = true
