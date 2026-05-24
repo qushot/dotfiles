@@ -1,7 +1,7 @@
 [tools]
 ghcup = "0.2.3.0"
-go = "1.26.0"
-node = "24"
+go = "1.26.3"
+node = "26"
 
 [tasks.ghcup-recommended]
 run = "ghcup upgrade && ghcup list | grep recommended"
