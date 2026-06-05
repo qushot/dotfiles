@@ -5,3 +5,6 @@ node = "26"
 
 [tasks.ghcup-recommended]
 run = "ghcup upgrade && ghcup list | grep recommended"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
