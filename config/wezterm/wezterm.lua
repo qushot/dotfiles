@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 -- wezterm.target_triple: https://wezterm.org/config/lua/wezterm/target_triple.html
 
 local background_opacity = 0.85
-local background_blur = 10
+local background_blur = 0
 local scheme_name = "Ubuntu" -- , Kanagawa (Gogh),
 config.automatically_reload_config = true -- default is true since version 20201031-154415-9614e117
 config.use_ime = true -- default is true since version 20220319-142410-0fcdea07
@@ -78,7 +78,7 @@ config.keys = {
     mods = "LEADER",
     action = wezterm.action_callback(
       function(window)
-        require("toggle").background_blur(window, background_blur)
+        require("toggle").background_blur(window, 10)
       end
     ),
   },
