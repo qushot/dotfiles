@@ -11,6 +11,10 @@ export VISUAL="vim"
 export ZCOMPDUMP_DIR="$XDG_CACHE_HOME/zsh"
 export ZCOMPDUMP_FILE="$ZCOMPDUMP_DIR/zcompdump-$ZSH_VERSION"
 
+# Zsh zsh-abbr
+export ABBR_SET_EXPANSION_CURSOR=1
+export ABBR_LINE_CURSOR_MARKER="%ABBR_CURSOR_MARKER%"
+
 # History settings
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 
