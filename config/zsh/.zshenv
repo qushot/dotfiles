@@ -19,6 +19,7 @@ export ABBR_LINE_CURSOR_MARKER="%ABBR_CURSOR_MARKER%"
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 
 # User binaries
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Homebrew
