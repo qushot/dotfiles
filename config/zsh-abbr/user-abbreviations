@@ -105,3 +105,6 @@ abbr 'docker compose l'='docker compose logs -f'
 
 # Kubernetes
 abbr 'k'='kubectl'
+
+# jq
+abbr 'jqc'=' echo '\''%ABBR_CURSOR_MARKER%'\'' | jq -c '\''.'\'''
