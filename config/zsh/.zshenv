@@ -67,7 +67,7 @@ export PATH=$PATH:$GOPATH/bin
 # export PATH=$HOME/sdk/go$GOVERSION/bin:$PATH
 
 # Haskell
-export PATH=$PATH:$HOME/.ghcup/bin
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
