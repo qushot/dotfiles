@@ -182,59 +182,10 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-# gcloud
-new-gcloud-config() {
-  local config_name account project region
-
-  read -r "config_name?Configuration name: "
-  read -r "account?Account email: "
-  read -r "project?Project ID: "
-  read -r "region?Cloud Run region (empty = asia-northeast1): "
-  region=${region:-asia-northeast1}
-
-  if [[ -z "$config_name" || -z "$account" || -z "$project" ]]; then
-    echo "Configuration name, account, and project are required." >&2
-    return 1
-  fi
-
-  gcloud config configurations create "$config_name"
-  gcloud config configurations activate "$config_name"
-  gcloud config set account "$account"
-  gcloud config set disable_usage_reporting False
-  gcloud config set project "$project"
-  gcloud config set run/region "$region"
-  gcloud config set survey/disable_prompts True
-}
-
 # Go
 # zsh-completionsで定義されている関数 __go_packages を削除、あるいは無効化したい…
 # unset -f __go_packages >/dev/null 2>&1 # NG
 # unfunction __go_packages # NG
-
-install-go-sdk() {
-  # references
-  # * https://go.dev/doc/manage-install
-  # * https://pkg.go.dev/golang.org/x/website/internal/dl
-  local go_version=$(
-    curl -sSL 'https://go.dev/dl/?mode=json&include=all' |\
-    jq -r '.[] | select(.stable == true) | .version' |\
-    fzf --prompt "Go version "
-  )
-  if [[ -z "$go_version" ]]; then
-    echo "No Go version selected."
-    return 1
-  fi
-  echo "Installing Go SDK version $go_version..."
-  eval "go install golang.org/dl/$go_version@latest && $go_version download && $go_version version"
-}
-
-versions() {
-  zsh --version
-  tmux -V
-  git --version
-  docker --version
-  go version
-}
 
 # Terraform
 if command -v terraform &> /dev/null; then
@@ -325,20 +276,6 @@ if command -v fzf &> /dev/null; then
   }
   zle -N fzf_git_log
   bindkey '^s' fzf_git_log
-
-  fzf-tmux-attach-session() {
-    local session=$(tmux list-sessions -F '#S' | fzf --prompt "Attach to tmux session: ")
-    if [ -n "$session" ]; then
-      tmux attach-session -t "$session"
-    fi
-  }
-
-  fzf-tmux-kill-session() {
-    local session=$(tmux list-sessions -F '#S' | fzf --prompt "Kill tmux session: ")
-    if [ -n "$session" ]; then
-      tmux kill-session -t "$session"
-    fi
-  }
 fi
 
 # starship

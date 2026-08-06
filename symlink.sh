@@ -13,3 +13,16 @@ for dir in $(ls "${DOTFILES_DIR}"/config); do
         echo "[SKIP] '${dir}' already exists in ${XDG_CONFIG_HOME}"
     fi
 done
+
+# 自作スクリプトを ~/.local/bin にリンク
+mkdir -p "$HOME/.local/bin"
+for script in "${DOTFILES_DIR}"/bin/*; do
+    name=$(basename "$script")
+    target="$HOME/.local/bin/${name}"
+    if [ ! -e "$target" ]; then
+        echo "[LINK] Linking '${name}' to ~/.local/bin"
+        ln -sfv "$script" "$target"
+    else
+        echo "[SKIP] '${name}' already exists in ~/.local/bin"
+    fi
+done

@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+zsh --version
+tmux -V
+git --version
+docker --version
+go version

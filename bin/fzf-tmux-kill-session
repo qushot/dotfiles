@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+command -v fzf >/dev/null || { echo "fzf is required" >&2; exit 1; }
+command -v tmux >/dev/null || { echo "tmux is required" >&2; exit 1; }
+
+session=$(tmux list-sessions -F '#S' | fzf --prompt "Kill tmux session: ")
+if [[ -n "$session" ]]; then
+  tmux kill-session -t "$session"
+fi

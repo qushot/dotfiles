@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+# references
+# * https://go.dev/doc/manage-install
+# * https://pkg.go.dev/golang.org/x/website/internal/dl
+go_version=$(
+  curl -sSL 'https://go.dev/dl/?mode=json&include=all' |
+    jq -r '.[] | select(.stable == true) | .version' |
+    fzf --prompt "Go version "
+)
+if [[ -z "$go_version" ]]; then
+  echo "No Go version selected."
+  exit 1
+fi
+echo "Installing Go SDK version $go_version..."
+go install "golang.org/dl/${go_version}@latest"
+"$go_version" download
+"$go_version" version

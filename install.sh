@@ -37,6 +37,9 @@ ln -sfv ${DOTFILES_DIR}/config/* ${XDG_CONFIG_HOME}
 # 動作確認のために ~/.config 配下のシンボリックリンクを削除するスクリプト
 # for name in $(ls ${XDG_CONFIG_HOME}); do unlink ${XDG_CONFIG_HOME}/${name}; done
 
+# 自作スクリプトを ~/.local/bin にリンク
+ln -sfv "${DOTFILES_DIR}"/bin/* "$HOME/.local/bin/"
+
 # Install Homebrew
 echo "Installing Homebrew..."
 NONINTERACTIVE=1 \
