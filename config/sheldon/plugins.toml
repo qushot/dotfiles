@@ -20,6 +20,7 @@ github = "romkatv/zsh-defer"
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
@@ -30,6 +31,7 @@ apply = ["defer"]
 
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
+apply = ["defer"]
 
 [plugins.zsh-abbr]
 github = "olets/zsh-abbr"
