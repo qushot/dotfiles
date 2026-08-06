@@ -29,7 +29,8 @@ mkdir -p \
     "$XDG_CONFIG_HOME" \
     "$XDG_CACHE_HOME" \
     "$XDG_DATA_HOME" \
-    "$XDG_STATE_HOME"
+    "$XDG_STATE_HOME" \
+    "$HOME/.local/bin"
 
 # .config 配下のディレクトリをリンク
 ln -sfv ${DOTFILES_DIR}/config/* ${XDG_CONFIG_HOME}
@@ -79,4 +80,3 @@ case "$OSTYPE" in
     sudo shutdown -r now
     ;;
 esac
-
