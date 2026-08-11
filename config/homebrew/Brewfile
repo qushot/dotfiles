@@ -24,10 +24,18 @@ brew "glow"
 brew "gron"
 # Like cURL, but for gRPC
 brew "grpcurl"
+# Kubernetes package manager
+brew "helm"
 # Command-line pager for JSON data
 brew "jless"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Run local Kubernetes cluster in Docker
+brew "kind"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Polyglot runtime manager (asdf rust clone)

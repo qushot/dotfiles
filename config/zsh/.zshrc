@@ -152,7 +152,9 @@ if command -v brew &>/dev/null; then
     # * rustup: `rm -f $XDG_CACHE_HOME/zsh/completions/_rustup; rustup completions zsh > $XDG_CACHE_HOME/zsh/completions/_rustup`
     # * cargo: `rm -f $XDG_CACHE_HOME/zsh/completions/_cargo; rustup completions zsh cargo > $XDG_CACHE_HOME/zsh/completions/_cargo`
     # * tenv: `rm -f $XDG_CACHE_HOME/zsh/completions/_tenv; tenv completion zsh > $XDG_CACHE_HOME/zsh/completions/_tenv`
-    # * kubectl: TBD
+    # * kubectl: `rm -f $XDG_CACHE_HOME/zsh/completions/_kubectl; kubectl completion zsh > $XDG_CACHE_HOME/zsh/completions/_kubectl`
+    # * kind: `rm -f $XDG_CACHE_HOME/zsh/completions/_kind; kind completion zsh > $XDG_CACHE_HOME/zsh/completions/_kind`
+    # * helm: `rm -f $XDG_CACHE_HOME/zsh/completions/_helm; helm completion zsh > $XDG_CACHE_HOME/zsh/completions/_helm`
     # * terraform: TBD
     # * ng: TBD
 
